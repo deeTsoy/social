@@ -1,0 +1,22 @@
+.diologs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.diologsItems {
+    padding: 10px;
+}
+
+.diologsItems .diolog {
+    padding: auto;
+    color: black;
+    margin-top: 5px;
+}
+
+.diolog active {
+    color: brown;
+}
+
+.messages {
+    padding: 10px;
+}
