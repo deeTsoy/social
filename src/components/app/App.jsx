@@ -10,7 +10,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 const App =(props) => {
   const {profilePage, messagesPage} = props.state;
-  console.log(profilePage)
+
   return (
     <Router>
       <div className="app-wrapper">
@@ -18,8 +18,8 @@ const App =(props) => {
         <NavBar/>
         <div className='app-wrapper-content'>
           <Routes>
-              <Route path="/profile" element={ () => <Profile state={profilePage} /> }/>
-              <Route path="/messages" element={() => <Messages state ={messagesPage}/>}/>
+              <Route path="/profile" element={<Profile state={profilePage}/>}/>
+              <Route path="/messages" element={<Messages state ={messagesPage}/>}/>
               <Route path="/news" element={<News/>}/>
               <Route path="/music" element={<Music/>}/>
               <Route path="/settings" element={<Settings/>}/>
