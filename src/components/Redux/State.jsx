@@ -1,3 +1,5 @@
+import { reRender } from "../Render";
+
 let state = {
     messagesPage: {
         dialogData : [
@@ -37,5 +39,17 @@ let state = {
     }
    
 };
+
+export let addPost = (p) =>{
+    let newPost = {
+        id: 5,
+        post: p, 
+        like:0
+    };
+
+    state.profilePage.postsData.push(newPost);
+    reRender(state);
+};
+
 
 export default state;

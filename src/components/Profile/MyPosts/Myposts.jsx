@@ -1,9 +1,10 @@
 import React from 'react'; 
 import Post from './post/post';
 import s from './MyPosts.module.css';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 const MyPosts = (props) => { 
+
 
 let posts = props.postsData.map(item =>  item = <Post massage = {item.post} likes = {item.like}/>)
 
@@ -13,12 +14,11 @@ let newPostElement = useRef();
 const addPost = () => {
   // достаем содержимое из референса
   let text = newPostElement.current.value;
-  alert(text);
+  props.addPost(text);
+  newPostElement.current.value = ''; 
 };
 
-
-
-    return (
+return (
       <div className={s.postsBlock}> 
         <h3> My posts </h3>
         <div> 
@@ -36,5 +36,6 @@ const addPost = () => {
     </div> 
     );
 };
+
  
 export default MyPosts;
