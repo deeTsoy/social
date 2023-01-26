@@ -35,19 +35,26 @@ let state = {
             {id: 2, post: "How are you?!", like: 56},
             {id: 3, post: "Sugoi", like: 10},
             {id: 4, post: "HOla holaaaaa", like:12}
-            ]
+            ],
+        newPostData: 'newText'
     }
    
 };
 
-export let addPost = (p) =>{
+export let addPost = () =>{
     let newPost = {
         id: 5,
-        post: p, 
+        post: state.profilePage.newPostData, 
         like:0
     };
 
     state.profilePage.postsData.push(newPost);
+    state.profilePage.newPostData ='';
+    reRender(state);
+};
+
+export let updateNewPostText = (newText) =>{
+    state.profilePage.newPostData = newText;
     reRender(state);
 };
 

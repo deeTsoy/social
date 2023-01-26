@@ -15,7 +15,11 @@ const addPost = () => {
   // достаем содержимое из референса
   let text = newPostElement.current.value;
   props.addPost(text);
-  newPostElement.current.value = ''; 
+};
+
+let onPostChange = () => {
+  let text = newPostElement.current.value;
+  props.updateNewPostText(text);
 };
 
 return (
@@ -24,7 +28,7 @@ return (
         <div> 
           <div>
             {/* привязываем референс к инпуту */}
-            <textarea ref={newPostElement}> </textarea>
+            <textarea ref={newPostElement} onChange={onPostChange} value ={props.newPostData}/> 
           </div>
           <div>
             <button onClick={addPost}> Add post</button>
