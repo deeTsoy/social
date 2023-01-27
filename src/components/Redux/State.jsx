@@ -27,7 +27,8 @@ let state = {
             {id: 2, massage: "How are you?!"},
             {id: 3, massage: "Sugoi"},
             {id: 4, massage: "Sugoiii!!"}
-        ]
+        ],
+        newMessageData : 'hola!!!'
     },
     profilePage : {
         postsData : [
@@ -57,6 +58,23 @@ export let updateNewPostText = (newText) =>{
     state.profilePage.newPostData = newText;
     reRender(state);
 };
+
+export let addNewMessageText =(newText) => {
+    state.messagesPage.newMessage = newText;
+    reRender(state);
+}
+
+export let addMessage = () =>{
+    let newMessage = {
+        id: 7,
+        message: state.messagesPage.newMessageData
+    };
+    state.messagesPage.massagesData.push(newMessage);
+    state.messagesPage.newMessageData ='';
+    reRender(state);
+};
+
+
 
 
 export default state;

@@ -1,7 +1,7 @@
 import React from 'react'; 
 import Post from './post/post';
 import s from './MyPosts.module.css';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 const MyPosts = (props) => { 
 
@@ -12,9 +12,7 @@ let posts = props.postsData.map(item =>  item = <Post massage = {item.post} like
 let newPostElement = useRef();
 
 const addPost = () => {
-  // достаем содержимое из референса
-  let text = newPostElement.current.value;
-  props.addPost(text);
+  props.addPost();
 };
 
 let onPostChange = () => {
@@ -28,7 +26,10 @@ return (
         <div> 
           <div>
             {/* привязываем референс к инпуту */}
-            <textarea ref={newPostElement} onChange={onPostChange} value ={props.newPostData}/> 
+            <textarea 
+              ref={newPostElement} 
+              onChange={onPostChange} 
+              value ={props.newPostData}/> 
           </div>
           <div>
             <button onClick={addPost}> Add post</button>

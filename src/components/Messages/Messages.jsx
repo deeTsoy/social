@@ -7,14 +7,18 @@ import { useRef } from 'react';
 
 const Messages = (props) => {
     let dialogs = props.state.dialogData.map(item => <DialogItem name={item.name} id= {item.id}/>);
-    let massages = props.state.massagesData.map(item => <MessageItem message ={item.massage}/>);
+    let massages = props.state.massagesData.map(item => <MessageItem message ={item.massage} id = {item.id}/>);
 
     let newMessage = useRef();
 
-    const addPost = () => {
-    let text = newMessage.current.value;
-    alert(text);
+    let addMessage = () => {
+    props.addMessage();
     };
+
+    let onChangeMessage = () =>{
+        let text = newMessage.current.value;
+        props.addNewMessageText(text);
+    }
 
     return (
         <div className={styles.diologs}>
@@ -25,10 +29,13 @@ const Messages = (props) => {
                {massages}
             </div>
             <div>
-            <textarea ref={newMessage}> </textarea>
+            <textarea 
+                ref={newMessage}
+                onChange={onChangeMessage}
+                value ={props.newMessageData}/>
             </div>
             <div>
-                <button onClick={addPost}>addMessage</button>
+                <button onClick={addMessage}>add Message</button>
             </div>
         </div>
     )
