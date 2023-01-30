@@ -1,4 +1,7 @@
-import { reRender } from "../Render";
+
+let reRender =() => {
+    console.log('updateTree');
+}
 
 let state = {
     messagesPage: {
@@ -42,7 +45,7 @@ let state = {
    
 };
 
-export let addPost = () =>{
+export const addPost = () =>{
     let newPost = {
         id: 5,
         post: state.profilePage.newPostData, 
@@ -51,30 +54,31 @@ export let addPost = () =>{
 
     state.profilePage.postsData.push(newPost);
     state.profilePage.newPostData ='';
-    reRender(state);
+    reRender();
 };
 
-export let updateNewPostText = (newText) =>{
+export const updateNewPostText = (newText) =>{
     state.profilePage.newPostData = newText;
-    reRender(state);
+    reRender();
 };
 
-export let addNewMessageText =(newText) => {
+export const addNewMessageText =(newText) => {
     state.messagesPage.newMessage = newText;
-    reRender(state);
+    reRender();
 }
 
-export let addMessage = () =>{
+export const addMessage = () =>{
     let newMessage = {
         id: 7,
         message: state.messagesPage.newMessageData
     };
     state.messagesPage.massagesData.push(newMessage);
     state.messagesPage.newMessageData ='';
-    reRender(state);
+    reRender();
 };
 
-
-
+export const sub = (observer) => {
+    reRender= observer;
+}
 
 export default state;
