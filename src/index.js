@@ -1,8 +1,7 @@
 import React from 'react';
-import state from './components/Redux/State'
+import store from './components/Redux/State'
 import ReactDOM from 'react-dom/client';
 import App from './components/app/App';
-import { addPost, updateNewPostText, addNewMessageText, addMessage, sub } from './components/Redux/State';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -10,16 +9,17 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
     <React.StrictMode>
       <App 
-        state={state} 
-        addPost = {addPost} 
-        updateNewPostText={updateNewPostText} 
-        addNewMessageText={addNewMessageText}
-        addMessage={addMessage}
+        state={store.getState()} 
+        // bind связывает контест this  из стора, а не из компонента из которого ее вызывают
+        addPost = {store.addPost.bind(store)} 
+        updateNewPostText={store.updateNewPostText.bind(store)} 
+        addNewMessageText={store.addNewMessageText.bind(store)}
+        addMessage={store.addMessage.bind(store)}
       />
     </React.StrictMode>
   );
 };
 
-reRender(state);
+reRender(store.getState());
 
-sub(reRender);
+store.sub(reRender);
