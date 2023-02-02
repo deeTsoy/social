@@ -10,11 +10,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
     <React.StrictMode>
       <App 
         state={store.getState()} 
-        // bind связывает контест this  из стора, а не из компонента из которого ее вызывают
-        addPost = {store.addPost.bind(store)} 
-        updateNewPostText={store.updateNewPostText.bind(store)} 
-        addNewMessageText={store.addNewMessageText.bind(store)}
-        addMessage={store.addMessage.bind(store)}
+        /* Метод bind() создаёт новую функцию, 
+        которая при вызове устанавливает в качестве 
+        контекста выполнения this предоставленное значение.*/
+        dispatch = {store.dispatch.bind(store)} 
       />
     </React.StrictMode>
   );

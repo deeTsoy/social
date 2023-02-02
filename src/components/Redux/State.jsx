@@ -41,47 +41,49 @@ let store = {
             newPostData: 'newText'
         }
        },
+    _callSubscriber(){
+        console.log('updateTree');
+    },
 
     getState(){
         return this._state;
     },
-    _callSubscriber(){
-        console.log('updateTree');
-    },
-    addPost(){
-        let newPost = {
-            id: 5,
-            post: this._state.profilePage.newPostData, 
-            like:0
-        };
-    
-        this._state.profilePage.postsData.push(newPost);
-        this._state.profilePage.newPostData ='';
-        this._callSubscriber();
-    },
-    updateNewPostText(newText){
-        this._state.profilePage.newPostData = newText;
-        this._callSubscriber();
-    },
-    addNewMessageText(newText){
-        this._state.messagesPage.newMessage = newText;
-        this._callSubscriber();
-    },
-    
-    addMessage(){
-        let newMessage = {
-            id: 7,
-            message: this._state.messagesPage.newMessageData
-        };
-        this._state.messagesPage.massagesData.push(newMessage);
-        this._state.messagesPage.newMessageData ='';
-        this._callSubscriber();
-    },
     
     sub(observer){
         this._callSubscriber= observer;
-    }
+    },
     
+    dispatch(action){
+        if(action.type === 'ADD_POST'){
+            let newPost = {
+                id: 5,
+                post: this._state.profilePage.newPostData, 
+                like:0
+            };
+        
+            this._state.profilePage.postsData.push(newPost);
+            this._state.profilePage.newPostData ='';
+            this._state.profilePage.newPostData = action.newText;
+            this._callSubscriber(this._state);
+
+        }else if(action.type === 'UPDATE_NEW_POST_TEXT'){
+                this._state.profilePage.newPostData = action.newText;
+                this._callSubscriber();
+
+        }else if(action.type === 'ADD_MESSAGE'){
+            let newMessage = {
+                id: 7,
+                message: this._state.messagesPage.newMessageData
+            };
+            this._state.messagesPage.massagesData.push(newMessage);
+            this._state.messagesPage.newMessageData ='';
+            this._callSubscriber();
+
+        }else if(action.type === 'ADD_NEW_MESSAGE_TEXT'){
+                this._state.messagesPage.newMessage = action.newText;
+                this._callSubscriber(this._state)
+        }
+    }
 };
 
 export default store;

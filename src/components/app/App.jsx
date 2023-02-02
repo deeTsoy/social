@@ -9,7 +9,6 @@ import Settings from '../Settings/Settings';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 const App =(props) => {
-  const {profilePage, messagesPage} = props.state;
 
 
   return (
@@ -20,14 +19,11 @@ const App =(props) => {
         <div className='app-wrapper-content'>
           <Routes>
               <Route path="/profile" element={<Profile 
-                profilePage={profilePage} 
-                addPost={props.addPost} 
-                updateNewPostText={props.updateNewPostText}/>}/>
+                profilePage={props.state.profilePage} 
+                dispatch={props.dispatch}/>}/>
               <Route path="/messages" element={<Messages 
-                state ={messagesPage}
-                addMessage={props.addMessage}
-                addNewMessageText={props.addNewMessageText}
-                newMessageData = {messagesPage.newMessageData}/>}/>
+                state ={props.state.messagesPage}
+                dispatch={props.dispatch}/>}/>
               <Route path="/news" element={<News/>}/>
               <Route path="/music" element={<Music/>}/>
               <Route path="/settings" element={<Settings/>}/>

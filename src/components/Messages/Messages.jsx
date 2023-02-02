@@ -12,12 +12,12 @@ const Messages = (props) => {
     let newMessage = useRef();
 
     let addMessage = () => {
-    props.addMessage();
+    props.dispatch({type:'ADD_MESSAGE'});
     };
 
     let onChangeMessage = () =>{
         let text = newMessage.current.value;
-        props.addNewMessageText(text);
+        props.dispatch({type:'ADD_NEW_MESSAGE_TEXT', newText: text});
     }
 
     return (
@@ -32,7 +32,7 @@ const Messages = (props) => {
             <textarea 
                 ref={newMessage}
                 onChange={onChangeMessage}
-                value ={props.newMessageData}/>
+                value ={props.state.newMessageData}/>
             </div>
             <div>
                 <button onClick={addMessage}>add Message</button>

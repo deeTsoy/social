@@ -12,12 +12,13 @@ let posts = props.postsData.map(item =>  item = <Post massage = {item.post} like
 let newPostElement = useRef();
 
 const addPost = () => {
-  props.addPost();
+
+  props.dispatch({type:'ADD_POST'});
 };
 
 let onPostChange = () => {
   let text = newPostElement.current.value;
-  props.updateNewPostText(text);
+  props.dispatch({type: 'UPDATE_NEW_POST_TEXT', newText: text });
 };
 
 return (
