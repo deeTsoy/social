@@ -10,6 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
     <React.StrictMode>
       <App 
         state={store.getState()} 
+        store={store}
         /* Метод bind() создаёт новую функцию, 
         которая при вызове устанавливает в качестве 
         контекста выполнения this предоставленное значение.*/

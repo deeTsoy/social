@@ -2,6 +2,7 @@ import React from 'react';
 import Post from './post/post';
 import s from './MyPosts.module.css';
 import { useRef } from 'react';
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../Redux/State';
 
 const MyPosts = (props) => { 
 
@@ -12,13 +13,14 @@ let posts = props.postsData.map(item =>  item = <Post massage = {item.post} like
 let newPostElement = useRef();
 
 const addPost = () => {
-
-  props.dispatch({type:'ADD_POST'});
+  let action = addPostActionCreator();
+  props.dispatch(action);
 };
 
 let onPostChange = () => {
   let text = newPostElement.current.value;
-  props.dispatch({type: 'UPDATE_NEW_POST_TEXT', newText: text });
+  let action = updateNewPostTextActionCreator(text);
+  props.dispatch(action);
 };
 
 return (
