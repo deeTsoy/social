@@ -2,13 +2,13 @@ import React from "react";
 import DialogItem from "./DialogItem/DialogItem";
 import styles from "./Messages.module.css";
 import MessageItem from "./MessageItem/MessageItem";
-import {sendMessageActionCreator, updateNewMessageTextActionCreator} from '../Redux/State';
+import {sendMessageActionCreator, updateNewMessageTextActionCreator} from '../Redux/messageReducer';
 
 
 const Messages = (props) => {
     let state = props.store.getState().messagesPage;
     let dialogs = state.dialogData.map(item => <DialogItem name={item.name} id= {item.id}/>);
-    let massages = state.massagesData.map(item => <MessageItem message ={item.massage} id = {item.id}/>);
+    let messages = state.messagesData.map(item => <MessageItem message ={item.message} id = {item.id}/>);
     let newMessage = state.newMessageData;
 
 
@@ -23,27 +23,28 @@ const Messages = (props) => {
         props.dispatch(action);
     }
 
-    return (
-        <div className={styles.diologs}>
-            <div className={styles.diologsItems}>
-            {dialogs}
-            </div>
-            <div className={styles.messages}>
-               <div>
-                {massages}
-               </div>
-            </div>
-            <div>
-            <textarea 
-                onChange={onChangeMessage}
-                value ={newMessage}
-                placeholder = 'here'/>
-            </div>
-            <div>
-                <button onClick={addMessage}>add Message</button>
-            </div>
-        </div>
-    )
+    return (    
+        <div className={styles.diologs}> 
+            <div className={styles.diologsItems}> 
+                { dialogs } 
+            </div> 
+            <div className={styles.messages}> 
+                <div>{ messages }</div> 
+                <div> 
+                    <div>
+                        <textarea 
+                            value={newMessage} 
+                            onChange={onChangeMessage} 
+                            placeholder='Enter your message'
+                        />
+                    </div> 
+                    <div>
+                        <button onClick={addMessage}>Send</button>
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
+    );
 };
 export default Messages;
 
