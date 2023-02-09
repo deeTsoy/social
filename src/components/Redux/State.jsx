@@ -30,7 +30,7 @@ let store = {
                 {id: 3, message: "Sugoi"},
                 {id: 4, message: "Sugoiii!!"}
             ],
-            newMessageData : ''
+            newMessageData : 'lok'
         },
         profilePage : {
             postsData : [

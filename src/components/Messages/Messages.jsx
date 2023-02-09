@@ -6,7 +6,9 @@ import {sendMessageActionCreator, updateNewMessageTextActionCreator} from '../Re
 
 
 const Messages = (props) => {
-    let state = props.store.getState().messagesPage;
+   
+    
+    let state = props.state;
     let dialogs = state.dialogData.map(item => <DialogItem name={item.name} id= {item.id}/>);
     let messages = state.messagesData.map(item => <MessageItem message ={item.message} id = {item.id}/>);
     let newMessage = state.newMessageData;

@@ -4,13 +4,15 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 
 const Profile = (props) => { 
+  const {postsData, newPostData} = props.profilePage;
+ 
     return (
     <div> 
       <ProfileInfo/>
       <MyPosts 
-        postsData={props.profilePage.postsData} 
+        postsData={postsData} 
         dispatch={props.dispatch} 
-        newPostData={props.profilePage.newPostData}/>
+        newPostData={newPostData}/>
     </div> 
     );
 };

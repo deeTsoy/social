@@ -10,7 +10,6 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 const App =(props) => {
 
-
   return (
     <Router>
       <div className="app-wrapper">
@@ -22,7 +21,7 @@ const App =(props) => {
                 profilePage={props.state.profilePage} 
                 dispatch={props.dispatch}/>}/>
               <Route path="/messages" element={<Messages 
-                store ={props.store}
+                state ={props.state.messagesPage}
                 dispatch={props.dispatch}/>}/>
               <Route path="/news" element={<News/>}/>
               <Route path="/music" element={<Music/>}/>
