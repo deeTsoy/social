@@ -2,25 +2,21 @@ import React from 'react';
 import Post from './post/post';
 import s from './MyPosts.module.css';
 import { useRef } from 'react';
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../Redux/profileReducer';
 
 const MyPosts = (props) => { 
 
-
-let posts = props.postsData.map(item =>  item = <Post massage = {item.post} likes = {item.like}/>)
+let posts = props.postData.map(item =>  item = <Post massage = {item.post} likes = {item.like}/>)
 
 //создаем ссылку на элемент
 let newPostElement = useRef();
 
-const addPost = () => {
-  let action = addPostActionCreator();
-  props.dispatch(action);
+const onAddPost = () => {
+  props.addPost()
 };
 
 let onPostChange = () => {
   let text = newPostElement.current.value;
-  let action = updateNewPostTextActionCreator(text);
-  props.dispatch(action);
+  props.updateNewPost(text);
 };
 
 return (
@@ -35,7 +31,7 @@ return (
               value ={props.newPostData}/> 
           </div>
           <div>
-            <button onClick={addPost}> Add post</button>
+            <button onClick={onAddPost}> Add post</button>
           </div>
         </div> 
         <div className={s.posts}> 
