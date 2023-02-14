@@ -28,7 +28,7 @@ let initialState = {
         {id: 3, message: "Sugoi"},
         {id: 4, message: "Sugoiii!!"}
     ],
-    newMessageData : 'lok'
+    newMessageData : ''
 };
 
 const messageReducer = (state = initialState, action) => {
@@ -38,13 +38,16 @@ const messageReducer = (state = initialState, action) => {
             id: 6,
             message: state.newMessageData
         };
-        state.messagesData.push(newMessage);
-        state.newMessageData = '';
-        return state;
+        let stateCopy = {...state};
+        stateCopy.messagesData = [...state.messagesData];
+        stateCopy.messagesData.push(newMessage);
+        stateCopy.newMessageData = '';
+        return stateCopy;
     }
     case ADD_NEW_MESSAGE_TEXT: {
-        state.newMessageData = action.newText;
-        return state;
+        let stateCopy = {...state};
+        stateCopy.newMessageData = action.newText;
+        return stateCopy;
     }
     default: {
         return state;
