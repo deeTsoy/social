@@ -5,7 +5,7 @@ import { useRef } from 'react';
 
 const MyPosts = (props) => { 
 
-let posts = props.postData.map(item =>  item = <Post massage = {item.post} likes = {item.like}/>)
+let posts = props.profilePage.postsData.map(item =>  item = <Post massage = {item.post} likes = {item.like}/>)
 
 //создаем ссылку на элемент
 let newPostElement = useRef();
@@ -16,7 +16,7 @@ const onAddPost = () => {
 
 let onPostChange = () => {
   let text = newPostElement.current.value;
-  props.updateNewPost(text);
+  props.PostChange(text);
 };
 
 return (
@@ -28,7 +28,7 @@ return (
             <textarea 
               ref={newPostElement} 
               onChange={onPostChange} 
-              value ={props.newPostData}/> 
+              value ={props.profilePage.newPostData}/> 
           </div>
           <div>
             <button onClick={onAddPost}> Add post</button>
