@@ -5,7 +5,7 @@ import { useRef } from 'react';
 
 const MyPosts = (props) => { 
 
-let posts = props.profilePage.postsData.map(item =>  item = <Post massage = {item.post} likes = {item.like}/>)
+let posts = props.profilePage.postsData.map(item =>  item = <Post massage = {item.post} key={item.id}  likes = {item.like}/>)
 
 //создаем ссылку на элемент
 let newPostElement = useRef();

@@ -4,10 +4,15 @@ const ProfileInfo = () => {
     return(
     <div> 
         <div> 
-            <img src='https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350' /> 
+            <img src='https://huarache-shop.ru/800/600/https/pbs.twimg.com/media/ECCQSz2W4AUyBFz.jpg'  width="1000"/> 
         </div> 
         <div className={s.descriptionBlock}> 
-            ava + description 
+            <div>
+                <img src="https://avatarfiles.alphacoders.com/707/70732.png" height='100'/>
+            </div>
+            <div>
+                description...
+            </div>
         </div> 
     </div> 
       ) 
