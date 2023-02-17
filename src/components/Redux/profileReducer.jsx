@@ -9,14 +9,14 @@ let initialState =  {
       {id: 3, post: "Sugoi", like: 10},
       {id: 4, post: "HOla holaaaaa", like:12}
       ],
-  newPostData: 'newText'
+  newPostData: ''
 };
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:{
           let newPost = {
-            id: 5,
+            id: Math.random(),
             post: state.newPostData, 
             like:0
           };

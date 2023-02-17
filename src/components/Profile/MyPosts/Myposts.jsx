@@ -28,7 +28,8 @@ return (
             <textarea 
               ref={newPostElement} 
               onChange={onPostChange} 
-              value ={props.profilePage.newPostData}/> 
+              value ={props.profilePage.newPostData}
+              placeholder='Enter your text'/> 
           </div>
           <div>
             <button onClick={onAddPost}> Add post</button>

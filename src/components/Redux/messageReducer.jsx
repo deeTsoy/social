@@ -35,7 +35,7 @@ const messageReducer = (state = initialState, action) => {
     switch (action.type) {
     case SEND_MESSAGE: {
         const newMessage = {
-            id: 6,
+            id: Math.random(),
             message: state.newMessageData
         };
         let stateCopy = {...state};
