@@ -6,7 +6,7 @@ import MessagesContainer from '../Messages/MessagesContainer'
 import News from '../News/News';
 import Music from '../Music/Music';
 import Settings from '../Settings/Settings';
-import Users from '../Users/Users';
+import usersContainer from '../Users/usersContainer';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 const App =(props) => {
@@ -26,7 +26,7 @@ const App =(props) => {
               <Route path="/news" element={<News/>}/>
               <Route path="/music" element={<Music/>}/>
               <Route path="/settings" element={<Settings/>}/>
-              <Route path="/users" element={<Users 
+              <Route path="/users" element={<usersContainer 
                 store = {props.store}
                 />}/>
           </Routes>
