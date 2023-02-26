@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Users.module.css"
 
 const Users = (props) => {
+    console.log(props)
     return <div>
         {
             props.users.map(u => <div key={u.id}>

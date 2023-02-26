@@ -4,6 +4,7 @@ import Users from './Users';
 import {followAC, unFollowAC, setUsers} from './../Redux/userReducer';
 
 let mapState = (state)=> {
+    
     return {
         users: state.usersPage.users     
     }
@@ -11,11 +12,11 @@ let mapState = (state)=> {
 
 let mapDispatch= (dispatch) =>{
     return {
-        follow : (id) =>{
+        followAC : (id) =>{
             let action = followAC(id);
             dispatch(action);
         },
-        unFollow : (id) =>{
+        unFollowAC : (id) =>{
             let action = unFollowAC(id);
             dispatch(action);
         },
@@ -26,6 +27,6 @@ let mapDispatch= (dispatch) =>{
     };
 };
 
-const usersContainer = connect(mapState, mapDispatch)(Users);
+const UsersContainer = connect(mapState, mapDispatch)(Users);
 
-export default usersContainer;
+export default UsersContainer;
