@@ -1,7 +1,7 @@
 import './App.css';
 import Header from '../header/Header';
 import NavBar from '../NavBar/NavBar';
-import ProfileContainer from '../Profile/Profile';
+import ProfileContainer from '../Profile/ProfileContainer';
 import MessagesContainer from '../Messages/MessagesContainer'
 import News from '../News/News';
 import Music from '../Music/Music';
@@ -17,7 +17,7 @@ const App =(props) => {
         <NavBar/>
         <div className='app-wrapper-content'>
           <Routes>
-              <Route path="/profile" element={<ProfileContainer 
+              <Route path="/profile" element={<ProfileContainer
                 store = {props.store}
                 />}/>
               <Route path="/messages" element={<MessagesContainer 

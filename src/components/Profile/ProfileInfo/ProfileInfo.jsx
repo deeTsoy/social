@@ -1,7 +1,16 @@
 import s from'./ProfileInfo.module.css';
+import photo from "../../Users/userPhoto.png"
+import Preloader from "../../loader/loader"
 
 const ProfileInfo = (props) => {
-    
+    console.log(props)
+    if (!props.profile) {
+        return <Preloader />
+    }
+
+    let aboutMe = props.profile.aboutMe
+    let contacts = props.profile.contacts
+
     return(
     <div> 
         <div> 
@@ -9,10 +18,27 @@ const ProfileInfo = (props) => {
         </div> 
         <div className={s.descriptionBlock}> 
             <div>
-                <img src="https://avatarfiles.alphacoders.com/707/70732.png" height='100'/>
+                <img src={props.profile.photos.large} height='100'/>
             </div>
             <div>
-                description...
+               {aboutMe}
+            </div>
+            <div>
+               <div>
+                    {contacts.facebook}
+               </div>
+               <div>
+                    {contacts.github}
+                </div>
+                <div>
+                    {contacts.instagram}
+                </div>
+                <div>
+                    {contacts.twitter}
+                </div>
+                <div>
+                    {contacts.website}
+                </div>
             </div>
         </div> 
     </div> 
