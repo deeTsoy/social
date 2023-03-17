@@ -1,6 +1,7 @@
 import s from'./ProfileInfo.module.css';
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+    
     return(
     <div> 
         <div> 

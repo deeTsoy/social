@@ -29,7 +29,8 @@ class UsersContainerApi extends React.Component {
     render() {
         return <>
         {this.props.isFetching ? <Loader/> : null}
-            <Users totalUsersCount={this.props.totalUsersCount}
+            <Users 
+            totalUsersCount={this.props.totalUsersCount}
             pageSize={this.props.pageSize}
             currentPage={this.props.currentPage}
             onPageChanged={this.onPageChanged}

@@ -3,6 +3,7 @@ import styles from './post.module.css'
 
 
 const Post = (props) => { 
+    
     const {massage, likes} = props;
     return (
     <div className={styles.item}> 
