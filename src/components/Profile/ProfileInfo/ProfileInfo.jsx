@@ -3,11 +3,11 @@ import photo from "../../Users/userPhoto.png"
 import Preloader from "../../loader/loader"
 
 const ProfileInfo = (props) => {
-    console.log(props)
+
     if (!props.profile) {
         return <Preloader />
     }
-
+   
     let aboutMe = props.profile.aboutMe
     let contacts = props.profile.contacts
 
