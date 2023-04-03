@@ -1,15 +1,22 @@
-import {connect} from "react-redux";
-import {setUserProfile}from '../Redux/profileReducer'
-import ProfileContainerApi from './ProfileContainerApi';
-import {withRouter} from "react-router-dom";
+import { connect } from 'react-redux';
+import { setUserProfile } from '../Redux/profileReducer';
+import ProfileContainerApi from '../Profile/ProfileContainerApi';
+import { useParams } from 'react-router-dom';
 
+const mapStateToProps = (state) => ({
+  profile: state.profilePage.profile,
+});
 
-let mapStateToProps = (state) => {
-  return {
-    profile: state.profilePage.profile,
-  }
+const ProfileContainer = ({ setUserProfile, ...Props }) => {
+
+  const {userId} = useParams();
+  return (
+    <ProfileContainerApi
+      userId={userId}
+      {...Props}
+      setUserProfile={setUserProfile}
+    />
+  );
 };
-let WithRouter = withRouter(ProfileContainerApi);
-let ProfileContainer = connect(mapStateToProps, {setUserProfile})(WithRouter);
 
-export default ProfileContainer
+export default connect(mapStateToProps, { setUserProfile })(ProfileContainer);

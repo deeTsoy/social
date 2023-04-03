@@ -14,7 +14,7 @@ const ProfileInfo = (props) => {
     return(
     <div> 
         <div> 
-            <img src='https://huarache-shop.ru/800/600/https/pbs.twimg.com/media/ECCQSz2W4AUyBFz.jpg'  width="1000"/> 
+            <img src={'https://huarache-shop.ru/800/600/https/pbphotos.twimg.com/media/ECCQSz2W4AUyBFz.jpg'}  width="1000"/> 
         </div> 
         <div className={s.descriptionBlock}> 
             <div>

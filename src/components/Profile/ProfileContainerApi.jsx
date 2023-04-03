@@ -4,17 +4,18 @@ import axios from "axios";
 import Profile from './Profile';
 
 
+
 const ProfileContainerApi = (props) => {
-  let userId = this.props.mathch.params.userId;
+
   useEffect(() => {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2` + userId)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)  
       .then(response => {
         props.setUserProfile(response.data);
       });
-  }, []);
+  }, [props.userId]);
 
   return (
-    <Profile profile={props.profile} />
+    <Profile {...props} profile={props.profile} />
   )
 };
 
