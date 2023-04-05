@@ -1,5 +1,5 @@
 import './App.css';
-import Header from '../header/Header';
+import HeaderContainer from '../header/HeaderContainer';
 import NavBar from '../NavBar/NavBar';
 import ProfileContainer from '../Profile/ProfileContainer';
 import MessagesContainer from '../Messages/MessagesContainer'
@@ -13,7 +13,7 @@ const App =(props) => {
   return (
     <Router>
       <div className="app-wrapper">
-        <Header/>
+        <HeaderContainer/>
         <NavBar/>
         <div className='app-wrapper-content'>
           <Routes>
