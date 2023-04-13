@@ -22,7 +22,7 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        return<>{ this.props.isFetching ? <Loader /> : null }
+        return<>{ this.props.isFetching ? null : <Loader/>}
         <Users totalUsersCount={this.props.totalUsersCount}
                       pageSize={this.props.pageSize}
                       currentPage={this.props.currentPage}
@@ -30,6 +30,7 @@ class UsersContainer extends React.Component {
                       users={this.props.users}
                       follow={this.props.follow}
                       unfollow={this.props.unfollow}
+                      samuraiAPI={samuraiAPI}
         />
        </>
     }
