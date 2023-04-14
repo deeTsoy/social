@@ -3,7 +3,7 @@ import Users from "./Users";
 import Loader from "../loader/loader"
 import samuraiAPI from "../service/samuraiAPI"
 import {connect} from "react-redux";
-import {follow, setCurrentPage, setUsers, setTotalUsersCount, unfollow, toggleIsFetching} from "../Redux/userReducer";
+import {follow, setCurrentPage, setUsers, setTotalUsersCount, unfollow, toggleIsFetching, toggleIsFollowingProgress} from "../Redux/userReducer";
 
 
 class UsersContainer extends React.Component {
@@ -31,6 +31,8 @@ class UsersContainer extends React.Component {
                       follow={this.props.follow}
                       unfollow={this.props.unfollow}
                       samuraiAPI={samuraiAPI}
+                      toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+                      followingInProgress={this.props.followingInProgress}
         />
        </>
     }
@@ -43,10 +45,11 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
-let mapDispatchToProps = {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching }
+let mapDispatchToProps = {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollowingProgress}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
