@@ -10,18 +10,18 @@ const instance = axios.create({
     }
 }) 
 const samuraiAPI = {
-        async getUsers(currentPage , pageSize) {
-            const response = await instance.get(`users?page=${currentPage}&count=${pageSize}`);
-        return response.data;  
+    getUsers(currentPage = 1, pageSize = 10) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response => {
+                return response.data;
+            });
     },
 
-    async deleteId(id){
-        const response = await instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
-        return response;
+    deleteId(id){
+        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
     },
-    async postID(id){
-        const response = await instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
-        return response;
+    postID(id){
+        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
     }
 
 }

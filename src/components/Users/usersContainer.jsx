@@ -3,26 +3,20 @@ import Users from "./Users";
 import Loader from "../loader/loader"
 import samuraiAPI from "../service/samuraiAPI"
 import {connect} from "react-redux";
-import {follow, setCurrentPage, setUsers, setTotalUsersCount, unfollow, toggleIsFetching, toggleIsFollowingProgress} from "../Redux/userReducer";
+import {follow, setCurrentPage, setUsers, setTotalUsersCount, unfollow, toggleIsFetching, toggleIsFollowingProgress, getUsersThunkCreator} from "../Redux/userReducer";
 
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        samuraiAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
-            });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-        samuraiAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-                this.props.setUsers(data.items);
-            });
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
-        return<>{ this.props.isFetching ? null : <Loader/>}
+        return<>{ this.props.isFetching ? <Loader/> : null}
         <Users totalUsersCount={this.props.totalUsersCount}
                       pageSize={this.props.pageSize}
                       currentPage={this.props.currentPage}
@@ -50,6 +44,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollowingProgress}
+let mapDispatchToProps = {follow, unfollow, setUsers,
+     setCurrentPage, setTotalUsersCount, toggleIsFetching, 
+     toggleIsFollowingProgress,getUsers: getUsersThunkCreator}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

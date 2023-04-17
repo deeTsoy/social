@@ -34,6 +34,8 @@ let Users = (props) => {
                                     }
                                     props.toggleIsFollowingProgress(false, u.id);
                                     props.unfollow(u.id)
+                                }).catch(error =>{
+                                    console.log(error);
                                 });
                                 
                             }}>Unfollow</button>
