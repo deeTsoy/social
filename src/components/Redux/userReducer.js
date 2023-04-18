@@ -56,7 +56,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         }
         default:
@@ -65,8 +65,8 @@ const usersReducer = (state = initialState, action) => {
 }
 
 
-export const follow = (userId) => ({type: FOLLOW, userId })
-export const unfollow = (userId) => ({type: UNFOLLOW, userId })
+export const followSuccess = (userId) => ({type: FOLLOW, userId })
+export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId })
 export const setUsers = (users) => ({type: SET_USERS, users })
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage })
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount })
@@ -74,7 +74,7 @@ export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFe
 export const toggleIsFollowingProgress = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 
 
-export const getUsersThunkCreator = (currentPage, pageSize) =>{
+export const getUsers = (currentPage, pageSize) =>{
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
         samuraiAPI.getUsers(currentPage,pageSize).then(data => {
@@ -84,6 +84,32 @@ export const getUsersThunkCreator = (currentPage, pageSize) =>{
         });
     }
 }
+
+export const follow = (id) => {
+    return (dispatch) => {
+        dispatch(toggleIsFollowingProgress(true, id))
+        samuraiAPI.postID(id)
+        .then(response => {
+            if (response.data.resultCode === 0){
+                dispatch(followSuccess(id))
+            }
+            dispatch(toggleIsFollowingProgress(false, id));
+        });
+    }
+};
+
+export const unfollow = (id) => {
+    return (dispatch) => {
+        dispatch(toggleIsFollowingProgress(true, id))
+        samuraiAPI.deleteId(id)
+        .then(response => {
+            if (response.data.resultCode === 0){
+                dispatch(unfollowSuccess(id))
+            }
+            dispatch(toggleIsFollowingProgress(false, id));
+        });
+    }
+};
 
 
 export default usersReducer;
