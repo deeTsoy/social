@@ -7,7 +7,7 @@ let initialState =  {
     userId: null,
     email: null,
     login: null,
-    isAuth: true
+    isAuth: false
 };
 
 const authReducer = (state = initialState, action) => {
@@ -15,8 +15,8 @@ const authReducer = (state = initialState, action) => {
   switch(action.type) {
       case SET_USER_DATA: {
           return {
-              ...state,
-             ...action.Data,
+            ...state,
+            ...action.Data,
              isAuth: true
           };
       }
@@ -28,7 +28,7 @@ const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data: {userId, email, login}})
 
-export const authUser = () => (dispatch) => {
+export const getAuthUserData = () => (dispatch) => {
     samuraiAPI.auth()
             .then(response => {
                 if (response.data.resultCode === 0) {
