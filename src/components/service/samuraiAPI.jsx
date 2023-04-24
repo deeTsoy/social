@@ -24,7 +24,10 @@ const samuraiAPI = {
         return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
     },
     auth(){
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
+        return instance.get(`/auth/me`)
+    },
+    getProfile(userId){
+        return instance.get(`/profile/`+ userId)
     }
 
 }
