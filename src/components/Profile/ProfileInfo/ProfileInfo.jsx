@@ -1,6 +1,7 @@
 import s from'./ProfileInfo.module.css';
 import photo from "../../Users/userPhoto.png"
 import Preloader from "../../loader/loader"
+import land from './prof.jpg'
 
 const ProfileInfo = (props) => {
 
@@ -14,11 +15,11 @@ const ProfileInfo = (props) => {
     return(
     <div> 
         <div> 
-            <img src={'https://huarache-shop.ru/800/600/https/pbphotos.twimg.com/media/ECCQSz2W4AUyBFz.jpg'}  width="1000"/> 
+            <img src={land}  width="1000"/> 
         </div> 
         <div className={s.descriptionBlock}> 
             <div>
-                <img src={props.profile.photos.large} height='100'/>
+                {!props.profile.photos.large ? <img src={photo} height='100'/> : <img src={props.profile.photos.large} height='100'/>}
             </div>
             <div>
                {aboutMe}

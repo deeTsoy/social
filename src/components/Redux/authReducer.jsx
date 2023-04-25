@@ -17,7 +17,8 @@ const authReducer = (state = initialState, action) => {
           return {
             ...state,
             ...action.Data,
-             isAuth: true
+             isAuth: true,
+             login :action.data.login
           };
       }
       default:
