@@ -3,6 +3,7 @@ import HeaderContainer from '../header/HeaderContainer';
 import NavBar from '../NavBar/NavBar';
 import ProfileContainer from '../Profile/ProfileContainer';
 import MessagesContainer from '../Messages/MessagesContainer'
+import Login from '../Login/Login'
 import News from '../News/News';
 import Music from '../Music/Music';
 import Settings from '../Settings/Settings';
@@ -26,6 +27,7 @@ const App =(props) => {
               <Route path="/news" element={<News/>}/>
               <Route path="/music" element={<Music/>}/>
               <Route path="/settings" element={<Settings/>}/>
+              <Route path="/Login" element={<Login/>}/>
               <Route path="/users" element={<UsersContainer 
                 store = {props.store}
                 />}/>
