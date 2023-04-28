@@ -4,6 +4,7 @@ import Loader from "../loader/loader"
 import {connect} from "react-redux";
 import {follow, unfollow, getUsers} from "../Redux/userReducer";
 import withAuthRedirect from "../HOC/withAuthRedirect"
+import {compose} from "redux";
 
 
 
@@ -45,4 +46,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = {follow, unfollow, getUsers}
 
-export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersContainer));
+export default compose(withAuthRedirect,
+        connect(mapStateToProps, mapDispatchToProps)
+        )(UsersContainer);
+
