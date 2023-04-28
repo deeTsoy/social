@@ -22,8 +22,6 @@ const Messages = (props) => {
         props.updateNewMessageText(text);
     }
     
-    if(!props.isAuth ) return <Navigate to='/login' />
-
     return (    
         <div className={styles.diologs}> 
             <div className={styles.diologsItems}> 
