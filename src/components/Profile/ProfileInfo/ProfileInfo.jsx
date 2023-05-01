@@ -2,6 +2,7 @@ import s from'./ProfileInfo.module.css';
 import photo from "../../Users/userPhoto.png"
 import Preloader from "../../loader/loader"
 import land from './prof.jpg'
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
 
@@ -21,6 +22,7 @@ const ProfileInfo = (props) => {
             <div>
                 {!props.profile.photos.large ? <img src={photo} height='100'/> : <img src={props.profile.photos.large} height='100'/>}
             </div>
+            <ProfileStatus/>
             <div>
                {aboutMe}
             </div>
