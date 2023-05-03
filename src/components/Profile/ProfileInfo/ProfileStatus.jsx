@@ -1,18 +1,23 @@
 import s from'./ProfileInfo.module.css';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 
 const ProfileStatus= (props) => {
 const [status, setStatus] = useState('status');
 const [editer,setEditer] = useState(false);
+const volue = useRef();
 
-const activateEditor =() =>{
+const activateEditor = () =>{
     setEditer(true);
 }
-const deActivateEditor =() =>{
+const deActivateEditor = () =>{
     setEditer(false);
 } 
+const updateValue = () => {
+    let text = volue.target.value;
+    setStatus(text);
+}
     return(
         <div>
             {!editer &&
@@ -22,7 +27,7 @@ const deActivateEditor =() =>{
             }
             {editer &&
                 <div> 
-                    <input autoFocus ={true} onBlur = {deActivateEditor} value = {status}></input>
+                    <input ref={volue} autoFocus ={true} onBlur = {deActivateEditor} value = {status}></input>
                 </div>
             } 
         </div>
