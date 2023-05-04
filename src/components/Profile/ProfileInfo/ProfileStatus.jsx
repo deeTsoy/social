@@ -1,27 +1,32 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
-const ProfileStatus= (props) => {
+const ProfileStatus= ({updateUserStatus, status}) => {
 const [editer,setEditer] = useState(false);
-const [status, setStatus] = useState(props.status)
+const [localStatus, setLocalStatus] = useState(status)
+
+useEffect(() => {
+    setLocalStatus(status);
+  }, [status]);
 
 const activateEditor = () =>{
     setEditer(true);
 }
 const deActivateEditor = () =>{
     setEditer(false);
-    props.updateStatus(status)
+    updateUserStatus(localStatus);
 } 
 
 const onStatusChange = (e) => {
-    setStatus(e.currentTarget.value);
+    let nnn = e.currentTarget.value
+    setLocalStatus(nnn);
 }
     return(
         <div>
             {!editer &&
                 <div> 
-                    <span onDoubleClick={activateEditor}>{props.status || "NO Status"}</span>
+                    <span onDoubleClick={activateEditor}>{localStatus || "NO Status"}</span>
                 </div> 
             }
             {editer &&
