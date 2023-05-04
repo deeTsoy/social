@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getUserProfile } from '../Redux/profileReducer';
+import { getUserProfile, getUserStatus, updateUserStatus } from '../Redux/profileReducer';
 import Profile from './Profile';
 import { useParams, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,7 +21,7 @@ const ProfileContainer = (props) => {
   if(!isAuth ) return <Navigate to='/login' />
 
 
-  return <Profile profile={profile} />;
+  return <Profile profile={profile} status={status} updateUserStatus = {updateUserStatus}/>;
 };
 
 export default withAuthRedirect(ProfileContainer);
