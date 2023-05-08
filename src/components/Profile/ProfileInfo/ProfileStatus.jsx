@@ -19,8 +19,7 @@ const deActivateEditor = () =>{
 } 
 
 const onStatusChange = (e) => {
-    let nnn = e.currentTarget.value
-    setLocalStatus(nnn);
+    setLocalStatus( e.currentTarget.value);
 }
     return(
         <div>
