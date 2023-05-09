@@ -1,17 +1,25 @@
 import React from "react";
-import { Form, Field } from 'react-final-form'
-
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+
+    const { register, handleSubmit } = useForm();
+    const handleRegistration = (data) => console.log(data);
+
     return (
-        <Form>
-            <div>
-                <Field name="Login" component="input"/>
-            </div>
-            <div>
-                <Field name="passward" component="input"/>
-            </div>
-        </Form>
+        <form onSubmit={handleSubmit(handleRegistration)}>
+        <div>
+            <input name="name" placeholder={"name"} {...register('name')} />
+        </div>
+        <div>
+            <input type="password" name="password" placeholder={"password"} {...register('password')} />
+        </div>
+        <div>
+            <input type="checkbox" name="Remember Me!"  {...register('RememberMe!')} />
+            <label>Remember Me!</label>
+        </div>
+        <button>Submit</button>
+        </form>
     )
 }
 export default Login;
