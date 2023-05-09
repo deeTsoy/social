@@ -1,5 +1,4 @@
 const SEND_MESSAGE = 'SEND_MESSAGE';
-const ADD_NEW_MESSAGE_TEXT ='ADD_NEW_MESSAGE_TEXT';
 
 let initialState = { 
     dialogData : [
@@ -28,7 +27,6 @@ let initialState = {
         {id: 3, message: "Sugoi"},
         {id: 4, message: "Sugoiii!!"}
     ],
-    newMessageData : ''
 };
 
 const messageReducer = (state = initialState, action) => {
@@ -36,17 +34,11 @@ const messageReducer = (state = initialState, action) => {
     case SEND_MESSAGE: {
         const newMessage = {
             id: Math.random(),
-            message: state.newMessageData
+            message: action.newMessageData
         };
         let stateCopy = {...state};
         stateCopy.messagesData = [...state.messagesData];
         stateCopy.messagesData.push(newMessage);
-        stateCopy.newMessageData = '';
-        return stateCopy;
-    }
-    case ADD_NEW_MESSAGE_TEXT: {
-        let stateCopy = {...state};
-        stateCopy.newMessageData = action.newText;
         return stateCopy;
     }
     default: {
@@ -55,6 +47,5 @@ const messageReducer = (state = initialState, action) => {
     };
 };
 
-export const sendMessageActionCreator = () => ({type:SEND_MESSAGE});
-export const updateNewMessageTextActionCreator =(text) => ({type:ADD_NEW_MESSAGE_TEXT, newText: text});
+export const sendMessageActionCreator = (newMessageData) => ({type:SEND_MESSAGE, newMessageData});
 export default  messageReducer;

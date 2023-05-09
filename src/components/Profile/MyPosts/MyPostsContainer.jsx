@@ -1,4 +1,4 @@
-import { addPost, updateNewPostText } from '../../Redux/profileReducer';
+import { addPost } from '../../Redux/profileReducer';
 import MyPosts from './Myposts';
 import { connect } from 'react-redux';
 
@@ -10,12 +10,8 @@ let mapState = (state) => {
 };
 let mapDispatch =(dispatch) => {
   return {
-    addPost: () => {
-          let action = addPost();
-          dispatch(action);
-      },
-      updateNewPostText :(text) =>{
-          let action = updateNewPostText(text);
+    addPost: (newPostData) => {
+          let action = addPost(newPostData);
           dispatch(action);
       }
   }

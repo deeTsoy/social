@@ -1,5 +1,5 @@
 import Messages from "./Messages";
-import {sendMessageActionCreator, updateNewMessageTextActionCreator} from '../Redux/messageReducer';
+import {sendMessageActionCreator} from '../Redux/messageReducer';
 import { connect } from "react-redux";
 import withAuthRedirect from "../HOC/withAuthRedirect"
 import { compose } from "redux";
@@ -15,12 +15,8 @@ let mapState = (state) => {
 
 let mapDispatch =(dispatch) => {
     return {
-        addMessage: () => {
-            let action = sendMessageActionCreator();
-            dispatch(action);
-        },
-        updateNewMessageText :(text) =>{
-            let action = updateNewMessageTextActionCreator(text);
+        addMessage: (newMessageData) => {
+            let action = sendMessageActionCreator(newMessageData);
             dispatch(action);
         }
     }
