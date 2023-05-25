@@ -3,17 +3,29 @@ import { useForm } from "react-hook-form";
 
 const NewMessageInput = (props) => {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset , formState: { errors } } = useForm({mode : "onBlur"});
 
+
+    const onSubmit = (data)=> {
+        props.onSubmit(data);
+        reset();
+    }
 
     return (
-        <form onSubmit={handleSubmit(props.onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
         <div>
             <textarea name="newMessageData" placeholder={"Enter your message"} {...register('newMessageData', 
-            {   required: true,
-                maxLength: 30,
-                minLength: 5
+            {   required: "Text are required!",
+                maxLength:  {
+                    value : 50,
+                    message: 'need less!'
+                },
+                minLength: {
+                    value : 5,
+                    message: 'need more!'
+                }
             })} />
+            {errors.newMessageData && <div style={{color: "red" }}>{errors.newMessageData.message}</div>}
         </div>
         <button>Submit</button>
         </form>
