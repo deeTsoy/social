@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import styles from "./MyPosts.module.css"
 
 
-
-
 const NewPostInput = (props) => {
 
 
@@ -14,6 +12,7 @@ const NewPostInput = (props) => {
         props.addNewPost(data);
         reset();
     }
+    
     return (
         <form  onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formControl + " " + (errors.newPostData ? styles.error : "")}>
@@ -36,4 +35,5 @@ const NewPostInput = (props) => {
         </form>
     )
 }
+
 export default NewPostInput;

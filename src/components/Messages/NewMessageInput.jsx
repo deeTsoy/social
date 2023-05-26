@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import styles from "./Messages.module.css"
 
 const NewMessageInput = (props) => {
 
@@ -13,7 +14,7 @@ const NewMessageInput = (props) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className={styles.formControl + " " + (errors.newMessageData ? styles.error : "")}>
             <textarea name="newMessageData" placeholder={"Enter your message"} {...register('newMessageData', 
             {   required: "Text are required!",
                 maxLength:  {
