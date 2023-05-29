@@ -34,9 +34,13 @@ const samuraiAPI = {
     },
     updateStatus(status){
         return instance.put(`profile/status/`, {status: status})
+    },
+    logIn(email, password, rememberMe = false){
+        return  instance.post('/auth/login', {email, password, rememberMe} )
+    },
+    logOut(email, password, rememberMe = false){
+        return  instance.delete ('/auth/login', {email, password, rememberMe} )
     }
-
-
 }
 
 export default samuraiAPI;
