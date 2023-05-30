@@ -16,9 +16,7 @@ const authReducer = (state = initialState, action) => {
       case SET_USER_DATA: {
           return {
             ...state,
-            ...action.Data,
-             isAuth: true,
-             login :action.data.login
+            ...action.payload
           };
       }
       default:
@@ -27,7 +25,7 @@ const authReducer = (state = initialState, action) => {
 };
 
 
-export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth}})
+export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload: {userId, email, login, isAuth}})
 
 export const getAuthUserData = () => (dispatch) => {
     samuraiAPI.auth()
@@ -47,13 +45,13 @@ export const logIn = (email, password, rememberMe) => (dispatch) => {
             });
 };
 
-export const logOut = () => (dispatch) => {
+export const logout = () => (dispatch) => {
     samuraiAPI.logOut()
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setAuthUserData(null, null, null, false));
-                }
-            });
-};
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false));
+            }
+        });
+}
 
 export default authReducer;

@@ -15,7 +15,7 @@ const Login = (props) => {
 
 
     let navigate = useNavigate();
-    
+
     if(props.isAuth) {
         return navigate("/profile");
     }

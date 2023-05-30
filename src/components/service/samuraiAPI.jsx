@@ -38,8 +38,8 @@ const samuraiAPI = {
     logIn(email, password, rememberMe = false){
         return  instance.post('/auth/login', {email, password, rememberMe} )
     },
-    logOut(email, password, rememberMe = false){
-        return  instance.delete ('/auth/login', {email, password, rememberMe} )
+    logOut(){
+        return  instance.delete('/auth/login')
     }
 }
 
