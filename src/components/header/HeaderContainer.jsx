@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from './Header';
-import { useDispatch,connect } from 'react-redux';
 import { getAuthUserData, logout } from '../Redux/authReducer';
 
-const HeaderContainer = (props) => {
+const HeaderContainer = () => {
   const dispatch = useDispatch();
+  const { isAuth, login } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getAuthUserData());
   }, [dispatch]);
 
-  return <Header isAuth={props.isAuth} login={props.login} logout= {props.logout}/>;
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  return <Header isAuth={isAuth} login={login} logout={handleLogout} />;
 };
 
-const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuth,
-  login: state.auth.login,
-});
-export default  connect(mapStateToProps, {getAuthUserData, logout})(HeaderContainer);
+export default HeaderContainer;
