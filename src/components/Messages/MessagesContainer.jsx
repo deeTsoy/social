@@ -1,30 +1,21 @@
-import Messages from "./Messages";
-import {sendMessageActionCreator} from '../Redux/messageReducer';
-import { connect } from "react-redux";
-import withAuthRedirect from "../HOC/withAuthRedirect"
-import { compose } from "redux";
+import React from 'react';
+import Messages from './Messages';
+import { sendMessageActionCreator } from '../Redux/messageReducer';
+import withAuthRedirect from '../HOC/withAuthRedirect';
+import { useDispatch, useSelector } from 'react-redux';
 
+const MessagesContainer = () => {
+  const dispatch = useDispatch();
+  const { messagesPage, isAuth } = useSelector((state) => ({
+    messagesPage: state.messagesPage,
+    isAuth: state.auth.isAuth
+  }));
 
+  const addMessage = (newMessageData) => {
+    dispatch(sendMessageActionCreator(newMessageData));
+  };
 
-let mapState = (state) => {
-    return {
-        state:state.messagesPage,
-        isAuth: state.auth.isAuth
-    }
-}
+  return <Messages state={messagesPage} isAuth={isAuth} addMessage={addMessage} />;
+};
 
-let mapDispatch =(dispatch) => {
-    return {
-        addMessage: (newMessageData) => {
-            let action = sendMessageActionCreator(newMessageData);
-            dispatch(action);
-        }
-    }
-}
- 
-
-
-export default compose(withAuthRedirect,
-                        connect(mapState, mapDispatch))
-                        (Messages);
-
+export default withAuthRedirect(MessagesContainer);
