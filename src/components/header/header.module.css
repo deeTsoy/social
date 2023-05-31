@@ -14,3 +14,64 @@
 .loginBlock a {
     color: black;
 }
+
+.button {
+    display: inline-block;
+    padding: 9px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #ff1d1d;
+}
+
+.button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.button:active {
+    background-color: #3e8e41;
+}
+
+.button.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.Activeframe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: px;
+    border: 2px solid #070801;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+.loginframe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 2px solid #070801;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    color: #333333;
+}

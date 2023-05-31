@@ -88,7 +88,7 @@ export const getUsers = (currentPage, pageSize) =>{
 export const follow = (id) => {
     return (dispatch) => {
         dispatch(toggleIsFollowingProgress(true, id))
-        samuraiAPI.postID(id)
+        samuraiAPI.follow(id)
         .then(response => {
             if (response.data.resultCode === 0){
                 dispatch(followSuccess(id))
@@ -101,7 +101,7 @@ export const follow = (id) => {
 export const unfollow = (id) => {
     return (dispatch) => {
         dispatch(toggleIsFollowingProgress(true, id))
-        samuraiAPI.deleteId(id)
+        samuraiAPI.unFollow(id)
         .then(response => {
             if (response.data.resultCode === 0){
                 dispatch(unfollowSuccess(id))
