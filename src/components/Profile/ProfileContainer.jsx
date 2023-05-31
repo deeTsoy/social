@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { getUserProfile, getUserStatus, updateUserStatus } from '../Redux/profileReducer';
 import Profile from './Profile';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import withAuthRedirect from "../HOC/withAuthRedirect"
 
 
-const ProfileContainer = (props) => {
+const ProfileContainer = () => {
   const { userId } = useParams();
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profilePage.profile);

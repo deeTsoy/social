@@ -1,52 +1,53 @@
-import React from 'react';
-import Users from "./Users";
-import Loader from "../loader/loader"
-import {connect} from "react-redux";
-import {follow, unfollow, getUsers} from "../Redux/userReducer";
-import withAuthRedirect from "../HOC/withAuthRedirect"
-import {compose} from "redux";
+import React, { useEffect } from 'react';
+import Users from './Users';
+import Loader from '../loader/loader';
+import { useSelector, useDispatch } from 'react-redux';
+import { follow, unfollow, getUsers } from '../Redux/userReducer';
+import withAuthRedirect from '../HOC/withAuthRedirect';
+import { compose } from 'redux';
 
+const UsersContainer = () => {
+  const dispatch = useDispatch();
+  const {
+    users,
+    pageSize,
+    totalUsersCount,
+    currentPage,
+    isFetching,
+    followingInProgress
+  } = useSelector((state) => state.usersPage);
 
+  useEffect(() => {
+    dispatch(getUsers(currentPage, pageSize));
+  }, [dispatch, currentPage, pageSize]);
 
-class UsersContainer extends React.Component {
-    componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
-    }
+  const onPageChanged = (pageNumber) => {
+    dispatch(getUsers(pageNumber, pageSize));
+  };
 
-    onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
-    }
+  const handleFollow = (userId) => {
+    dispatch(follow(userId));
+  };
 
-    render() {
-        return<>{ this.props.isFetching ? <Loader/> : null}
-        <Users totalUsersCount={this.props.totalUsersCount}
-                      pageSize={this.props.pageSize}
-                      currentPage={this.props.currentPage}
-                      onPageChanged={this.onPageChanged}
-                      users={this.props.users}
-                      follow={this.props.follow}
-                      unfollow={this.props.unfollow}
-                      followingInProgress={this.props.followingInProgress}
-        />
-       </>
-    }
-}
+  const handleUnfollow = (userId) => {
+    dispatch(unfollow(userId));
+  };
 
+  return (
+    <>
+      {isFetching ? <Loader /> : null}
+      <Users
+        totalUsersCount={totalUsersCount}
+        pageSize={pageSize}
+        currentPage={currentPage}
+        onPageChanged={onPageChanged}
+        users={users}
+        follow={handleFollow}
+        unfollow={handleUnfollow}
+        followingInProgress={followingInProgress}
+      />
+    </>
+  );
+};
 
-let mapStateToProps = (state) => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
-    }
-}
-
-let mapDispatchToProps = {follow, unfollow, getUsers}
-
-export default compose(withAuthRedirect,
-        connect(mapStateToProps, mapDispatchToProps)
-        )(UsersContainer);
-
+export default compose(withAuthRedirect)(UsersContainer);

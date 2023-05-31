@@ -1,23 +1,17 @@
-import { addPost } from '../../Redux/profileReducer';
+import React from 'react';
 import MyPosts from './Myposts';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addPost } from '../../Redux/profileReducer';
 
+const MyPostsContainer = () => {
+  const dispatch = useDispatch();
+  const profilePage = useSelector((state) => state.profilePage);
 
-let mapState = (state) => {
-  return {
-    profilePage: state.profilePage
-  }
+  const handleAddPost = (newPostData) => {
+    dispatch(addPost(newPostData));
+  };
+
+  return <MyPosts profilePage={profilePage} addPost={handleAddPost} />;
 };
-let mapDispatch =(dispatch) => {
-  return {
-    addPost: (newPostData) => {
-          let action = addPost(newPostData);
-          dispatch(action);
-      }
-  }
-}
 
-
-const MyPostsContainer = connect(mapState, mapDispatch)(MyPosts);
- 
 export default MyPostsContainer;
