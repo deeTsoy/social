@@ -1,16 +1,26 @@
-import './App.css';
+import { useEffect } from "react"
 import HeaderContainer from '../header/HeaderContainer';
-import NavBar from '../NavBar/NavBar';
 import ProfileContainer from '../Profile/ProfileContainer';
+import UsersContainer from '../Users/usersContainer'
 import MessagesContainer from '../Messages/MessagesContainer'
+import NavBar from '../NavBar/NavBar';
 import Login from '../Login/Login'
 import News from '../News/News';
 import Music from '../Music/Music';
 import Settings from '../Settings/Settings';
-import UsersContainer from '../Users/usersContainer'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getAuthUserData } from '../Redux/authReducer';
+import './App.css';
 
 const App =(props) => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAuthUserData());
+  }, [dispatch]);
+
   return (
     <Router>
       <div className="app-wrapper">

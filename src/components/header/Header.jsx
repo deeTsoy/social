@@ -10,7 +10,7 @@ const  Header = (props) => {
             <div className={s.loginBlock}>
             { props.isAuth
                 ? <div>
-                    <div className={s.Activeframe}>{ 'is active!'} </div>
+                    <div className={s.Activeframe}>{ 'active!'} </div>
                     <button className={s.button } onClick={props.logout}>Log out</button>
                   </div>
                 : <div className={s.loginframe}>

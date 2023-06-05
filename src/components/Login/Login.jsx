@@ -8,17 +8,23 @@ import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
 
-    const { register, handleSubmit , formState: { errors }} = useForm();
-    const handleRegistration = (data) => {
-        props.logIn(data.email, data.password, data.rememberMe) 
-    };
-
-
+    const { register, handleSubmit , setError, formState: { errors }} = useForm();
+    const handleRegistration = async (data) => {
+        try {
+          await props.logIn(data.email, data.password, data.RememberMe);
+        } catch (error) {
+            setError("common", {
+                type: "manual",
+                message: "Failed to log in. Please check your credentials.",
+              })
+        }
+      };
+    
     let navigate = useNavigate();
-
     if(props.isAuth) {
         return navigate("/profile");
     }
+
 
     return (
         <form onSubmit={handleSubmit(handleRegistration)}>
