@@ -9,17 +9,24 @@ import News from '../News/News';
 import Music from '../Music/Music';
 import Settings from '../Settings/Settings';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getAuthUserData } from '../Redux/authReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { initializeApp } from "../Redux/appReducer";
+import Loader from "../loader/loader"
+
 import './App.css';
 
 const App =(props) => {
 
+  const initialized = useSelector(state => state.app.initialized);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAuthUserData());
+    dispatch(initializeApp());
   }, [dispatch]);
+
+  if (!initialized) {
+    return <Loader />
+    }
 
   return (
     <Router>

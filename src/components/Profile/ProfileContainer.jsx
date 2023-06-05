@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { getUserProfile, getUserStatus, updateUserStatus } from '../Redux/profileReducer';
 import Profile from './Profile';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import withAuthRedirect from "../HOC/withAuthRedirect"
 
@@ -9,14 +9,24 @@ import withAuthRedirect from "../HOC/withAuthRedirect"
 const ProfileContainer = () => {
   const { userId } = useParams();
   const dispatch = useDispatch();
+  const authorizedUserId = useSelector(state => state.auth.userId);
   const profile = useSelector(state => state.profilePage.profile);
   const status = useSelector(state => state.profilePage.status);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getUserProfile(userId || 2));
-    dispatch(getUserStatus(userId || 2));
-  }, [dispatch, userId]);
-
+    if (!userId) {
+    if (!authorizedUserId) {
+      navigate("/login");
+    } else {
+    dispatch(getUserProfile(authorizedUserId));
+    dispatch(getUserStatus(authorizedUserId));
+    }
+    } else {
+    dispatch(getUserProfile(userId));
+    dispatch(getUserStatus(userId));
+    }
+    }, [dispatch, navigate, userId, authorizedUserId]);
   
 
 
