@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL = "https://social-network.samuraijs.com/api/1.0/";
-const API_KEY = "b1775b2f-c3a5-4509-8dc9-90b5629de7c3";
+const API_KEY = "608debec-2fbd-45b2-8e35-669afc3799b2";
 
 const instance = axios.create({
   withCredentials: true,
@@ -58,6 +58,11 @@ const samuraiAPI = {
 
   async logOut() {
     return await this.request("/auth/login", "delete");
+  },
+  async updatePhoto(photo) {
+    const formData = new FormData();
+    formData.append('image', photo);
+    return await this.request(`profile/photo/`, "put", { photo });
   },
 };
 

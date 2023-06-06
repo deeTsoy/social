@@ -9,7 +9,7 @@ import withAuthRedirect from "../HOC/withAuthRedirect"
 const ProfileContainer = () => {
   const { userId } = useParams();
   const dispatch = useDispatch();
-  
+
   const { profile, status, authorizedUserId } = useSelector(state => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,

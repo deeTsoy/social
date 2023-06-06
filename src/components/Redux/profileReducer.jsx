@@ -4,6 +4,7 @@ import samuraiAPI from "../service/samuraiAPI";
 const ADD_POST =  'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const ADD_PROFILE_PHOTO= 'ADD_PROFILE_PHOTO';
 
 
 let initialState =  {
@@ -37,6 +38,9 @@ const profileReducer = (state = initialState, action) => {
       case SET_USER_STATUS: {
         return {...state, status: action.status}
     }
+    case ADD_PROFILE_PHOTO: {
+      return {...state, photo: action.photo}
+  }
       default:
           return state;
   }
@@ -46,6 +50,8 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = (newPostData) => ({type: ADD_POST , newPostData})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status})
+export const addProfilePhoto = (photo) => ({type: ADD_PROFILE_PHOTO, photo})
+
 
 
 export const getUserProfile = (userId) => (dispatch) => {
@@ -68,5 +74,15 @@ export const updateUserStatus = (status) => (dispatch) => {
       }
     });
 }
+
+export const addPhoto =(photo) => (dispatch) =>{
+  samuraiAPI.updatePhoto(photo)
+  .then(response => {
+    if(response.data.resultCode === 0){
+      dispatch(addProfilePhoto(photo));
+  }
+})
+}
+
 
 export default profileReducer;

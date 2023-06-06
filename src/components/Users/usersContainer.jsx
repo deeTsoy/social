@@ -35,17 +35,18 @@ const UsersContainer = () => {
 
   return (
     <>
-      {isFetching ? <Loader /> : null}
-      <Users
-        totalUsersCount={totalUsersCount}
-        pageSize={pageSize}
-        currentPage={currentPage}
-        onPageChanged={onPageChanged}
-        users={users}
-        follow={handleFollow}
-        unfollow={handleUnfollow}
-        followingInProgress={followingInProgress}
-      />
+      {isFetching ? <Loader /> : 
+            <Users
+            totalUsersCount={totalUsersCount}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChanged={onPageChanged}
+            users={users}
+            follow={handleFollow}
+            unfollow={handleUnfollow}
+            followingInProgress={followingInProgress}
+          />
+          }
     </>
   );
 };
