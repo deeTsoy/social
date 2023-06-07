@@ -39,8 +39,8 @@ const profileReducer = (state = initialState, action) => {
         return {...state, status: action.status}
     }
     case ADD_PROFILE_PHOTO: {
-      return {...state, photo: action.photo}
-  }
+      return { ...state, profile: { ...state.profile, photos: action.photo } };
+    }
       default:
           return state;
   }
@@ -79,7 +79,7 @@ export const addPhoto =(photo) => (dispatch) =>{
   samuraiAPI.updatePhoto(photo)
   .then(response => {
     if(response.data.resultCode === 0){
-      dispatch(addProfilePhoto(photo));
+      dispatch(addProfilePhoto(response.data.data.photos));
   }
 })
 }

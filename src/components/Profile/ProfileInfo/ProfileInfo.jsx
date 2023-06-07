@@ -3,6 +3,7 @@ import photo from "../../Users/userPhoto.png"
 import Preloader from "../../loader/loader"
 import land from './prof.jpg'
 import ProfileStatus from './ProfileStatus';
+import AddPhotoInput from './addPhotoInput'
 
 const ProfileInfo = (props) => {
 
@@ -21,6 +22,7 @@ const ProfileInfo = (props) => {
         <div className={s.descriptionBlock}> 
             <div>
                 {!props.profile.photos.large ? <img src={photo} height='100'/> : <img src={props.profile.photos.large} height='100'/>}
+                <AddPhotoInput addPhoto={props.addPhoto} />
             </div>
             <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
             <div>

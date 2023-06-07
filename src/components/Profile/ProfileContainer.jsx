@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getUserProfile, getUserStatus, updateUserStatus } from '../Redux/profileReducer';
+import { getUserProfile, getUserStatus, updateUserStatus, addPhoto } from '../Redux/profileReducer';
 import Profile from './Profile';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -33,7 +33,7 @@ const ProfileContainer = () => {
   
 
 
-  return <Profile profile={profile} status={status} updateUserStatus = {updateUserStatus}/>;
+  return <Profile profile={profile} status={status} updateUserStatus={updateUserStatus} addPhoto={addPhoto}/>;
 };
 
 export default withAuthRedirect(ProfileContainer);
