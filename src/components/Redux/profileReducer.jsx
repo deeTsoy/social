@@ -5,7 +5,7 @@ const ADD_POST =  'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const ADD_PROFILE_PHOTO= 'ADD_PROFILE_PHOTO';
-
+const DELETE_POST = 'DELETE_POST'; 
 
 let initialState =  {
   postsData : [
@@ -37,13 +37,15 @@ const profileReducer = (state = initialState, action) => {
       }
       case SET_USER_STATUS: {
         return {...state, status: action.status}
+      }
+      case ADD_PROFILE_PHOTO: {
+        return { ...state, profile: { ...state.profile, photos: action.photo } };
+      }
+      case DELETE_POST: 
+            return {...state, posts: state.posts.filter(p => p.id != action.postId)} 
+        default:
+            return state;
     }
-    case ADD_PROFILE_PHOTO: {
-      return { ...state, profile: { ...state.profile, photos: action.photo } };
-    }
-      default:
-          return state;
-  }
 };
 
 
@@ -51,6 +53,8 @@ export const addPost = (newPostData) => ({type: ADD_POST , newPostData})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status})
 export const addProfilePhoto = (photo) => ({type: ADD_PROFILE_PHOTO, photo})
+export const deletePost = (postId) => ({type: DELETE_POST, postId}) 
+ 
 
 
 
