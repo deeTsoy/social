@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./Users.module.css";
 import userPhoto from "./userPhoto.png";
 import { NavLink } from 'react-router-dom';
-
+import PagesLine from "./PagesLine"
 
 
 let Users = (props) => {
@@ -43,14 +43,11 @@ let Users = (props) => {
                 </span>
             </div>)
         }
-        <div>
-            {pages.map(p => {
-                return <button className={props.currentPage === p && styles.selectedPage}
-                             onClick={(e) => {
-                                 props.onPageChanged(p);
-                             }}>{p}</button>
-            })}
-        </div>
+        <PagesLine 
+        totalUsersCount={props.totalUsersCount} 
+        pageSize={props.pageSize} 
+        currentPage={props.currentPage}
+        onPageChanged={props.onPageChanged}/>
     </div>
 }
 

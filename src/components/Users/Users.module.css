@@ -6,3 +6,11 @@
 .selectedPage {
     color: red;
 }
+
+.middleLine {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
