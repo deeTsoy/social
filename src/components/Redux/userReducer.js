@@ -74,42 +74,47 @@ export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFe
 export const toggleIsFollowingProgress = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 
 
-export const getUsers = (currentPage, pageSize) =>{
-    return (dispatch) => {
-        dispatch(toggleIsFetching(true));
-        samuraiAPI.getUsers(currentPage,pageSize).then(data => {
-            dispatch(toggleIsFetching(false))
-            dispatch(setUsers(data.items));
-            dispatch(setTotalUsersCount(data.totalCount));
-        });
-    }
-}
+export const getUsers = (currentPage, pageSize) => {
+    return async (dispatch) => {
+      dispatch(toggleIsFetching(true));
+      try {
+        const data = await samuraiAPI.getUsers(currentPage, pageSize);
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
+      } catch (error) {
+        console.log(error);
+        dispatch(toggleIsFetching(false));
+      }
+    };
+  };
+  
 
-export const follow = (id) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowingProgress(true, id))
-        samuraiAPI.follow(id)
-        .then(response => {
-            if (response.data.resultCode === 0){
-                dispatch(followSuccess(id))
-            }
-            dispatch(toggleIsFollowingProgress(false, id));
-        });
-    }
-};
+  const followUnfollowFlow = async (dispatch, id, apiMethod, actionCreator ) =>{
+    dispatch(toggleIsFollowingProgress(true, id));
+    try {
+        let response = await apiMethod(id);
+        if (response.data.resultCode === 0) {
+            dispatch(actionCreator(id));
+        }
+    } catch (error) {
+            console.log(error);
+          }
+    dispatch(toggleIsFollowingProgress(false, id));
+  }
+  export const follow = (id) => {
+    return async (dispatch) => {
+      followUnfollowFlow(dispatch, id, samuraiAPI.follow.bind(samuraiAPI), followSuccess)
+    };
 
-export const unfollow = (id) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowingProgress(true, id))
-        samuraiAPI.unFollow(id)
-        .then(response => {
-            if (response.data.resultCode === 0){
-                dispatch(unfollowSuccess(id))
-            }
-            dispatch(toggleIsFollowingProgress(false, id));
-        });
-    }
-};
+  };
+  
+  export const unfollow = (id) => {
+    return async (dispatch) => {
+        followUnfollowFlow(dispatch, id, samuraiAPI.unFollow.bind(samuraiAPI), unfollowSuccess)
+    };
+  };
+  
 
 
 export default usersReducer;
