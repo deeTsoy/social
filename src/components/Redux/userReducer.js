@@ -77,6 +77,7 @@ export const toggleIsFollowingProgress = (isFetching, userId) => ({type: TOGGLE_
 export const getUsers = (currentPage, pageSize) => {
     return async (dispatch) => {
       dispatch(toggleIsFetching(true));
+      dispatch(setCurrentPage(currentPage))
       try {
         const data = await samuraiAPI.getUsers(currentPage, pageSize);
         dispatch(toggleIsFetching(false));
