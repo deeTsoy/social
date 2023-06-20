@@ -21,9 +21,7 @@ const PagesLine = ({ currentPage, onPageChanged,totalUsersCount, pageSize }) => 
             {pages
                 .filter(p => p >= leftPortionPageNumber && p<=rightPortionPageNumber)
                 .map((p) => {
-                return <button className={({
-                    [styles.selectedPage]: currentPage === p
-                }, styles.pageNumber) }
+                return <button 
                              key={p}
                              onClick={(e) => {
                                  onPageChanged(p);

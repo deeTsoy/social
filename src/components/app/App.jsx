@@ -1,8 +1,6 @@
+import React, { lazy, Suspense } from 'react';
 import { useEffect } from "react"
-import HeaderContainer from '../header/HeaderContainer';
-import ProfileContainer from '../Profile/ProfileContainer';
-import UsersContainer from '../Users/usersContainer'
-import MessagesContainer from '../Messages/MessagesContainer'
+import HeaderContainer from "../header/HeaderContainer"
 import NavBar from '../NavBar/NavBar';
 import Login from '../Login/Login'
 import News from '../News/News';
@@ -14,6 +12,11 @@ import { initializeApp } from "../Redux/appReducer";
 import Loader from "../loader/loader"
 
 import './App.css';
+
+const ProfileContainer = lazy(() => import('../Profile/ProfileContainer'));
+const UsersContainer = lazy(() => import('../Users/usersContainer'));
+const MessagesContainer = lazy(() => import('../Messages/MessagesContainer'));
+
 
 const App =(props) => {
 
@@ -34,21 +37,23 @@ const App =(props) => {
         <HeaderContainer/>
         <NavBar/>
         <div className='app-wrapper-content'>
-          <Routes>
-              <Route path="/profile/:userId?" element={<ProfileContainer
-                store = {props.store}
-                />}/>
-              <Route path="/messages" element={<MessagesContainer 
-                store = {props.store}
-                />}/>
-              <Route path="/news" element={<News/>}/>
-              <Route path="/music" element={<Music/>}/>
-              <Route path="/settings" element={<Settings/>}/>
-              <Route path="/Login" element={<Login/>}/>
-              <Route path="/users" element={<UsersContainer 
-                store = {props.store}
-                />}/>
-          </Routes>
+          <Suspense  fallback={<Loader />}>
+            <Routes>
+                <Route path="/profile/:userId?" element={<ProfileContainer
+                  store = {props.store}
+                  />}/>
+                <Route path="/messages" element={<MessagesContainer 
+                  store = {props.store}
+                  />}/>
+                <Route path="/news" element={<News/>}/>
+                <Route path="/music" element={<Music/>}/>
+                <Route path="/settings" element={<Settings/>}/>
+                <Route path="/Login" element={<Login/>}/>
+                <Route path="/users" element={<UsersContainer 
+                  store = {props.store}
+                  />}/>
+            </Routes>
+          </Suspense>
         </div>
       </div>
     </Router>

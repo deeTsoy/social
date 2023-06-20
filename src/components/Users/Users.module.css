@@ -26,7 +26,7 @@ button:hover {
 
 .selectedPage {
     background-color: #007bff;
-    color: #fff;
+    color: #f70303;
 }
 
 button:focus {
@@ -35,4 +35,5 @@ button:focus {
 
 button:active {
     transform: translateY(1px);
+    background-color: #ff0000;
 }
