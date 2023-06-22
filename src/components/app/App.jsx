@@ -1,14 +1,14 @@
 import React, { lazy, Suspense } from 'react';
 import { useEffect } from "react"
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { initializeApp } from "../Redux/appReducer";
 import HeaderContainer from "../header/HeaderContainer"
 import NavBar from '../NavBar/NavBar';
 import Login from '../Login/Login'
 import News from '../News/News';
 import Music from '../Music/Music';
 import Settings from '../Settings/Settings';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { initializeApp } from "../Redux/appReducer";
 import Loader from "../loader/loader"
 
 import './App.css';

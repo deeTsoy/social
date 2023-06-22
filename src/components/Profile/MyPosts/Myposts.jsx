@@ -12,7 +12,6 @@ const MyPosts = ({addPost, profilePage}) => {
 let addNewPost = (value) => {
   addPost(value.newPostData)
 }
-console.log('ref')
 return (
       <div className={s.postsBlock}> 
         <h3> My posts </h3>

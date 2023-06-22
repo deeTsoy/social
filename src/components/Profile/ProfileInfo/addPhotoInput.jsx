@@ -1,16 +1,17 @@
 import {  useRef } from 'react';
 
 function AddPhotoInput({ addPhoto }) {
+
     const onPhotoChangeHandler = (e) => {
-        if (e.target.files) {
+        if (e.target.files.length) {
             addPhoto(e.target.files[0]);
         }
     };
 
-    const inputRef = useRef(null);
+    const inputRef = useRef();
 
     const selectFileHandler = () => {
-        inputRef.current?.click();
+        inputRef.current.click();
     };
 
     return (
@@ -21,7 +22,7 @@ function AddPhotoInput({ addPhoto }) {
             <input
                 style={{ display: 'none' }}
                 ref={inputRef}
-                type="file"
+                type={"file"}
                 onChange={onPhotoChangeHandler}
             />
         </div>
