@@ -14,7 +14,8 @@ let initialState = {
     { id: 4, post: "HOla holaaaaa", like: 12 }
   ],
   profile: null,
-  status: ''
+  status: '', 
+
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -31,16 +32,17 @@ const profileReducer = (state = initialState, action) => {
       };
     }
     case SET_USER_PROFILE: {
-      return { ...state, profile: action.profile };
+      return { ...state, profile: action.profile }
     }
     case SET_USER_STATUS: {
-      return { ...state, status: action.status };
+      return { ...state, status: action.status }
     }
     case ADD_PROFILE_PHOTO: {
-      return { ...state, profile: { ...state.profile, photos: action.photos } };
+      return {...state, profile: {...state.profile, photos: action.photos }}  
     }
-    case DELETE_POST:
-      return { ...state, postsData: state.postsData.filter(p => p.id !== action.postId) };
+    case DELETE_POST:{
+      return { ...state, postsData: state.postsData.filter(p => p.id !== action.postId)}
+    }
     default:
       return state;
   }
@@ -50,31 +52,30 @@ export const addPost = (newPostData) => ({ type: ADD_POST, newPostData });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId });
-export const addProfilePhoto = (photos) => ({ type: ADD_PROFILE_PHOTO, photos });
+export const addProfilePhoto =  (photos) => ({type: ADD_PROFILE_PHOTO, photos}) ;
 
 
 export const getUserProfile = (userId) => async (dispatch) => {
-  const response = await samuraiAPI.getProfile(userId);
+  let response = await samuraiAPI.getProfile(userId);
   dispatch(setUserProfile(response.data));
 };
 
 export const getUserStatus = (userId) => async (dispatch) => {
-  const response = await samuraiAPI.getStatus(userId);
+  let response = await samuraiAPI.getStatus(userId);
   dispatch(setUserStatus(response.data));
 };
 
 export const updateUserStatus = (status) => async (dispatch) => {
-  const response = await samuraiAPI.updateStatus(status);
+  let response = await samuraiAPI.updateStatus(status);
   if (response.data.resultCode === 0) {
     dispatch(setUserStatus(status));
   }
 };
 
 export const addPhoto = (file) => async (dispatch) => {
-  const response = await samuraiAPI.updatePhoto(file);
+  let response = await samuraiAPI.updatePhoto(file);
   if (response.data.resultCode === 0) {
     dispatch(addProfilePhoto(response.data.data.photos));
-    console.log('asdafa')
   }
 };
 

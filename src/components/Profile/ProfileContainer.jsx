@@ -33,7 +33,12 @@ const ProfileContainer = () => {
   
 
 
-  return <Profile isOwner={!userId} profile={profile} status={status} updateUserStatus={updateUserStatus} addPhoto={addPhoto}/>;
+  return <Profile 
+  isOwner={!userId}
+   profile={profile} 
+   status={status} 
+   updateUserStatus={(status) => dispatch(updateUserStatus(status))} 
+   addPhoto={(photo) => dispatch(addPhoto(photo))}/>
 };
 
 export default withAuthRedirect(ProfileContainer);

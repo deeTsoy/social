@@ -11,7 +11,7 @@ function AddPhotoInput({ addPhoto }) {
     const inputRef = useRef();
 
     const selectFileHandler = () => {
-        inputRef.current.click();
+        inputRef.current?.click();
     };
 
     return (
@@ -22,7 +22,7 @@ function AddPhotoInput({ addPhoto }) {
             <input
                 style={{ display: 'none' }}
                 ref={inputRef}
-                type={"file"}
+                type="file"
                 onChange={onPhotoChangeHandler}
             />
         </div>

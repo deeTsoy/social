@@ -62,14 +62,14 @@ const samuraiAPI = {
 
   async updatePhoto(photoFile) {
     const formData = new FormData();
-    formData.append('image', photoFile);
+    formData.append("image", photoFile);
 
-    return await this.request('profile/photo', "put", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+    return instance.put(`profile/photo`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
     });
-  }
+}
 };
 
 export default samuraiAPI;

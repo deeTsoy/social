@@ -21,7 +21,7 @@ const ProfileInfo = (props) => {
         </div> 
         <div className={s.descriptionBlock}> 
             <div>
-                {props.profile.photos.large || <img src={photo} height='100'/>}
+                <img src={props.profile.photos.large || photo} height='100'/>
                 {props.isOwner && <AddPhotoInput addPhoto={props.addPhoto} /> }
             </div>
             <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
