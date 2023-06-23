@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import styles from "./MyPosts.module.css"
 
 
-const NewPostInput = (props) => {
+const NewPostInput = ({addNewPost}) => {
 
 
     const { register, handleSubmit, reset , formState: { errors } } = useForm({mode : "onBlur"});
 
     const onSubmit = (data)=> {
-        props.addNewPost(data);
+        addNewPost(data);
         reset();
     }
     

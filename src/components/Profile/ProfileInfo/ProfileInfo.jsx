@@ -5,14 +5,14 @@ import land from './prof.jpg'
 import ProfileStatus from './ProfileStatus';
 import AddPhotoInput from './addPhotoInput'
 
-const ProfileInfo = (props) => {
+const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus }) => {
 
-    if (!props.profile) {
+    if (!profile) {
         return <Preloader />
     }
    
-    let aboutMe = props.profile.aboutMe
-    let contacts = props.profile.contacts
+    let aboutMe = profile.aboutMe
+    let contacts = profile.contacts
 
     return(
     <div> 
@@ -21,10 +21,10 @@ const ProfileInfo = (props) => {
         </div> 
         <div className={s.descriptionBlock}> 
             <div>
-                <img src={props.profile.photos.large || photo} height='100'/>
-                {props.isOwner && <AddPhotoInput addPhoto={props.addPhoto} /> }
+                <img src={profile.photos.large || photo} height='100'/>
+                {isOwner && <AddPhotoInput addPhoto={addPhoto} /> }
             </div>
-            <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+            <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
             <div>
                {aboutMe}
             </div>

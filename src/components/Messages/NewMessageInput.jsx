@@ -2,18 +2,18 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./Messages.module.css"
 
-const NewMessageInput = (props) => {
+const NewMessageInput = ({onSubmit}) => {
 
     const { register, handleSubmit, reset , formState: { errors } } = useForm({mode : "onBlur"});
 
 
-    const onSubmit = (data)=> {
-        props.onSubmit(data);
+    const onSSubmit = (data)=> {
+        onSubmit(data);
         reset();
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSSubmit)}>
         <div className={styles.formControl + " " + (errors.newMessageData ? styles.error : "")}>
             <textarea name="newMessageData" placeholder={"Enter your message"} {...register('newMessageData', 
             {   required: "Text are required!",

@@ -4,16 +4,16 @@ import styles from "./Messages.module.css";
 import MessageItem from "./MessageItem/MessageItem";
 import NewMessageInput from "./NewMessageInput"
 
-const Messages = (props) => {
+const Messages = ({state, addMessage}) => {
   
 
     
-    let dialogs = props.state.dialogData.map(item => <DialogItem name={item.name} key={item.id} id= {item.id}/>);
-    let messages = props.state.messagesData.map(item => <MessageItem message ={item.message} key={item.id} id = {item.id}/>);
+    let dialogs = state.dialogData.map(item => <DialogItem name={item.name} key={item.id} id= {item.id}/>);
+    let messages = state.messagesData.map(item => <MessageItem message ={item.message} key={item.id} id = {item.id}/>);
 
 
     let addNewMessage = (value) => {
-        props.addMessage(value.newMessageData);
+        addMessage(value.newMessageData);
     }
     
     return (    

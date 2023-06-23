@@ -3,7 +3,7 @@ import styles from "./Users.module.css";
 
 const PagesLine = ({ currentPage, onPageChanged,totalUsersCount, pageSize }) => {
     let pages = [];
-    for (let i = 1; i <= 25; i++) {
+    for (let i = 1; i <= 200; i++) {
       pages.push(i);
     }
 

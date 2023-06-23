@@ -18,7 +18,7 @@ const UsersContainer = lazy(() => import('../Users/usersContainer'));
 const MessagesContainer = lazy(() => import('../Messages/MessagesContainer'));
 
 
-const App =(props) => {
+const App =({store}) => {
 
   const initialized = useSelector(state => state.app.initialized);
   const dispatch = useDispatch();
@@ -40,17 +40,17 @@ const App =(props) => {
           <Suspense  fallback={<Loader />}>
             <Routes>
                 <Route path="/profile/:userId?" element={<ProfileContainer
-                  store = {props.store}
+                  store = {store}
                   />}/>
                 <Route path="/messages" element={<MessagesContainer 
-                  store = {props.store}
+                  store = {store}
                   />}/>
                 <Route path="/news" element={<News/>}/>
                 <Route path="/music" element={<Music/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/Login" element={<Login/>}/>
                 <Route path="/users" element={<UsersContainer 
-                  store = {props.store}
+                  store = {store}
                   />}/>
             </Routes>
           </Suspense>

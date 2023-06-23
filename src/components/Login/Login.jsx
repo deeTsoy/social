@@ -6,12 +6,12 @@ import { logIn } from "../Redux/authReducer";
 import { useNavigate } from "react-router-dom";
 
 
-const Login = (props) => {
+const Login = ({logIn,isAuth}) => {
 
     const { register, handleSubmit , setError, formState: { errors }} = useForm();
     const handleRegistration = async (data) => {
         try {
-          await props.logIn(data.email, data.password, data.RememberMe);
+          await logIn(data.email, data.password, data.RememberMe);
         } catch (error) {
             setError("common", {
                 type: "manual",
@@ -21,7 +21,7 @@ const Login = (props) => {
       };
     
     let navigate = useNavigate();
-    if(props.isAuth) {
+    if(isAuth) {
         return navigate("/profile");
     }
 

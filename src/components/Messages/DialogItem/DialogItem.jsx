@@ -3,11 +3,11 @@ import {NavLink} from "react-router-dom"
 
 import styles from "./../Messages.module.css";
 
-const DialogItem = (props) => {
-    let path = "/messages/" + props.id;
+const DialogItem = ({id, name}) => {
+    let path = "/messages/" + id;
 
     return <div className={styles.diolog + " " + styles.active}>
-        <NavLink to={path} >{props.name}</NavLink>
+        <NavLink to={path} >{name}</NavLink>
     </div>
 }
  
