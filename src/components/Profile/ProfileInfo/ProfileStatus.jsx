@@ -24,7 +24,7 @@ const onStatusChange = (e) => {
     return(
         <div>
             {!editer &&
-                <div> 
+                <div> <b>Status: </b>
                     <span onDoubleClick={activateEditor}>{localStatus || "NO Status"}</span>
                 </div> 
             }

@@ -1,3 +1,4 @@
+import React from 'react';
 import s from'./ProfileInfo.module.css';
 import photo from "../../Users/userPhoto.png"
 import Preloader from "../../loader/loader"
@@ -25,29 +26,40 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus }) => {
                 {isOwner && <AddPhotoInput addPhoto={addPhoto} /> }
             </div>
             <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
-            <div>
-               {aboutMe}
-            </div>
-            <div>
-               <div>
-                    {contacts.facebook}
-               </div>
-               <div>
-                    {contacts.github}
-                </div>
-                <div>
-                    {contacts.instagram}
-                </div>
-                <div>
-                    {contacts.twitter}
-                </div>
-                <div>
-                    {contacts.website}
-                </div>
-            </div>
+            <ProfileData profile = {profile}/>
         </div> 
     </div> 
       ) 
+}
+
+const ProfileData = ({profile}) => { 
+    return <div> 
+        <div> 
+            <b>Full name</b>: {profile.fullName} 
+        </div> 
+        <div> 
+            <b>Looking for a job</b>: {profile.lookingForAJob ? "yes" : "no"} 
+        </div> 
+        {profile.lookingForAJob && 
+        <div> 
+            <b>My professional skills</b>: {profile.lookingForAJobDescription} 
+        </div> 
+        } 
+        <div> 
+            <b>About me</b>: {profile.aboutMe} 
+        </div> 
+        <div> 
+            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => { 
+            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/> 
+        })} 
+        </div> 
+    </div> 
+} 
+
+const Contact = ({contactTitle, contactVolue}) => {
+    return (<div className={s.contact}>
+        <b>{contactTitle}</b>:{contactVolue}
+    </div>)
 }
 
 export default ProfileInfo;
