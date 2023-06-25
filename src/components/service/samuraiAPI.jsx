@@ -59,7 +59,15 @@ const samuraiAPI = {
   async logOut() {
     return await this.request("/auth/login", "delete");
   },
-
+  async updateFullName(FullName) {
+    return await this.request(`profile/fullName`, "put", { FullName });
+  },
+  async updateGithub(github) {
+    return await this.request(`profile/contacts/github`, "put", { github });
+  },
+  async updateInstagram(instagram) {
+    return await this.request(`profile/contacts/instagram`, "put", { instagram });
+  },
   async updatePhoto(photoFile) {
     const formData = new FormData();
     formData.append("image", photoFile);
