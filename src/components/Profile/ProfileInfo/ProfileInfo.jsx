@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {useState}from 'react';
 import s from'./ProfileInfo.module.css';
 import photo from "../../Users/userPhoto.png"
 import Preloader from "../../loader/loader"
 import land from './prof.jpg'
 import ProfileStatus from './ProfileStatus';
 import AddPhotoInput from './addPhotoInput'
+import ProfileDataForm from "./ProfileDataForm/ProfileDataForm"
 
 const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus }) => {
+
+    const [editer,setEditer] = useState(false);
+    console.log(editer)
+    const activateEditor = () =>{
+        setEditer(true);
+    }
 
     if (!profile) {
         return <Preloader />
     }
-   
-    let aboutMe = profile.aboutMe
-    let contacts = profile.contacts
 
     return(
     <div> 
@@ -25,15 +29,22 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus }) => {
                 <img src={profile.photos.large || photo} height='100'/>
                 {isOwner && <AddPhotoInput addPhoto={addPhoto} /> }
             </div>
+            {isOwner ? <button onClick={activateEditor}>Edit</button> : null }
             <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
-            <ProfileData profile = {profile}/>
+            {editer ? <ProfileDataForm profile = {profile}/>
+             :  <ProfileData 
+             profile = {profile} 
+             isOwner={isOwner}
+             activateEditor={activateEditor}/> }
         </div> 
     </div> 
       ) 
 }
 
-const ProfileData = ({profile}) => { 
+const ProfileData = ({profile, isOwner, activateEditor}) => { 
     return <div> 
+        <div>
+        </div>
         <div> 
             <b>Full name</b>: {profile.fullName} 
         </div> 
