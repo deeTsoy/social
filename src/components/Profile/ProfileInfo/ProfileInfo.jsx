@@ -1,4 +1,4 @@
-import React, {useState}from 'react';
+import React, {useState, useEffect}from 'react';
 import s from'./ProfileInfo.module.css';
 import photo from "../../Users/userPhoto.png"
 import Preloader from "../../loader/loader"
@@ -29,7 +29,6 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus , updat
                 <img src={profile.photos.large || photo} height='100'/>
                 {isOwner && <AddPhotoInput addPhoto={addPhoto} /> }
             </div>
-            {isOwner ? <button onClick={activateEditor}>Edit</button> : null }
             <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
             {editer ? <ProfileDataForm profile = {profile} updateProfileInfo={updateProfileInfo}/>
              :  <ProfileData 
@@ -43,6 +42,7 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus , updat
 
 const ProfileData = ({profile, isOwner, activateEditor}) => { 
     return( <div> 
+        {isOwner ? <button onClick={activateEditor}>Edit</button> : null }
         <div>
         </div>
         <div> 
@@ -51,23 +51,27 @@ const ProfileData = ({profile, isOwner, activateEditor}) => {
         {!profile.lookingForAJob ? (        <div> 
             <b>Looking for a job</b>: {profile.lookingForAJob} 
         </div> ) : ( <div> 
-            <b>lookingForAJobDescription</b>: {profile.lookingForAJobDescription} 
+            <b>Job Description</b>: {profile.lookingForAJobDescription} 
         </div> )}
         <div> 
             <b>About me</b>: {profile.aboutMe} 
         </div> 
-        <div> 
-            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => { 
-            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/> 
-        })} 
-        </div> 
+        <div>
+            <h4>Contacts:</h4>
+            {Object.entries(profile.contacts).map(([key, value]) => (
+            <Contact key={key} contactTitle={key} contactValue={value} />
+      ))}
+        </div>
     </div> )
 } 
 
-const Contact = ({contactTitle, contactVolue}) => {
-    return (<div className={s.contact}>
-        <b>{contactTitle}</b>:{contactVolue}
-    </div>)
-}
+const Contact = ({ contactTitle, contactValue }) => {
+    return (
+      <div>
+        <b>{contactTitle}:</b>
+        <a href={contactValue}>{contactValue}</a>
+      </div>
+    );
+  };
 
 export default ProfileInfo;
