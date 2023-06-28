@@ -1,4 +1,4 @@
-import React, {useState, useEffect}from 'react';
+import React, {useState}from 'react';
 import s from'./ProfileInfo.module.css';
 import photo from "../../Users/userPhoto.png"
 import Preloader from "../../loader/loader"
@@ -11,8 +11,13 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus , updat
 
     const [editer,setEditer] = useState(false);
 
+
     const activateEditor = () =>{
         setEditer(true);
+    }
+
+    const deActivateEditor = () =>{
+        setEditer(false);
     }
 
     if (!profile) {
@@ -29,8 +34,9 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus , updat
                 <img src={profile.photos.large || photo} height='100'/>
                 {isOwner && <AddPhotoInput addPhoto={addPhoto} /> }
             </div>
+            {isOwner ? <button onClick={activateEditor}>Edit profile info</button> : null }
             <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
-            {editer ? <ProfileDataForm profile = {profile} updateProfileInfo={updateProfileInfo}/>
+            {editer ? <ProfileDataForm profile = {profile} deActivateEditor={deActivateEditor} updateProfileInfo={updateProfileInfo}/>
              :  <ProfileData 
              profile = {profile} 
              isOwner={isOwner}
@@ -42,14 +48,13 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus , updat
 
 const ProfileData = ({profile, isOwner, activateEditor}) => { 
     return( <div> 
-        {isOwner ? <button onClick={activateEditor}>Edit</button> : null }
         <div>
         </div>
         <div> 
             <b>Full name</b>: {profile.fullName} 
         </div> 
-        {!profile.lookingForAJob ? (        <div> 
-            <b>Looking for a job</b>: {profile.lookingForAJob} 
+        {!profile.lookingForAJob ? (<div> 
+            <b>Looking for a job</b>: {profile.lookingForAJob || "No thanks"} 
         </div> ) : ( <div> 
             <b>Job Description</b>: {profile.lookingForAJobDescription} 
         </div> )}

@@ -84,10 +84,12 @@ export const addPhoto = (file) => async (dispatch) => {
     dispatch(addProfilePhoto(response.data.data.photos));
   }
 };
-export const updateProfileInfo = (profile) => async (dispatch) => {
+export const updateProfileInfo = (profile) => async (dispatch, getState) => {
+  const id = getState().auth.userId
   let response = await samuraiAPI.updateProfile(profile);
   if (response.data.resultCode === 0) {
     dispatch(setProfileInfo(response.data.data.profile));
+    dispatch(getUserProfile(id))
   }
 };
 

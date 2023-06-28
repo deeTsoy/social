@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
 
-const ProfileDataForm = ({ profile, updateProfileInfo }) => {
+const ProfileDataForm = ({ profile, updateProfileInfo, deActivateEditor }) => {
 
   const [localProfile, setLocalProfile] = useState(profile);
 
@@ -24,16 +24,16 @@ const ProfileDataForm = ({ profile, updateProfileInfo }) => {
     defaultValues: {
       aboutMe: profile.aboutMe,
       contacts: {
-        facebook: null,
-        website: null,
-        vk: null,
-        twitter: null,
-        instagram: null,
-        youtube: null,
-        github: null,
-        mainLink: null
+        facebook: profile.contacts.facebook,
+        website: profile.contacts.website,
+        vk: profile.contacts.vk,
+        twitter: profile.contacts.twitter,
+        instagram: profile.contacts.instagram,
+        youtube: profile.contacts.youtube,
+        github: profile.contacts.github,
+        mainLink: profile.contacts.mainLink
       },
-      lookingForAJob: false,
+      lookingForAJob: profile.lookingForAJob,
       lookingForAJobDescription: profile.lookingForAJobDescription,
       fullName: profile.fullName
     }
@@ -41,12 +41,42 @@ const ProfileDataForm = ({ profile, updateProfileInfo }) => {
 
   const handleSave = async (NewPofile) => {
      await updateProfileInfo(NewPofile);
+     deActivateEditor();
   };
 
   return (
     <form onSubmit={handleSubmit(handleSave)}>
       <div>
-      <div>
+        <div>
+          <input
+            onChange={onProfileChange}
+            name="fullName"
+            type="string"
+            placeholder={"fullName"}
+            {...register("fullName", {
+              required: "Full Name is required!"
+            })}
+          />
+        </div>
+        <div>
+          <textarea
+            autoFocus={true}
+            onChange={onProfileChange}
+            name="lookingForAJobDescription"
+            placeholder={"Description"}
+            {...register('lookingForAJobDescription')}
+          />
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            autoFocus={true}
+            onChange={onProfileChange}
+            name="lookingForAJob"
+            {...register('lookingForAJob')}
+          />
+        </div>
+        <div>
           <textarea
             autoFocus={true}
             onChange={onProfileChange}
@@ -69,35 +99,6 @@ const ProfileDataForm = ({ profile, updateProfileInfo }) => {
               />
             </div>
           ))}
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            autoFocus={true}
-            onChange={onProfileChange}
-            name="lookingForAJob"
-            {...register('lookingForAJob')}
-          />
-        </div>
-        <div>
-          <input
-            autoFocus={true}
-            onChange={onProfileChange}
-            name="lookingForAJobDescription"
-            placeholder={"Description"}
-            {...register('lookingForAJobDescription')}
-          />
-        </div>
-        <div>
-          <input
-            onChange={onProfileChange}
-            name="fullName"
-            type="string"
-            placeholder={"fullName"}
-            {...register("fullName", {
-              required: "Full Name is required!"
-            })}
-          />
         </div>
       </div>
 
