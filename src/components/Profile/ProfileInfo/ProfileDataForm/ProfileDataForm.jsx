@@ -1,73 +1,109 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
-import styles from "./ProfileDataForm.module.css"
 
- const ProfileDataForm =({profile, updateContacts}) => {
-    const [localContacts, setLocalContacts] = useState(profile.contacts)
+const ProfileDataForm = ({ profile, updateProfileInfo }) => {
 
-    useEffect(() => {
-        setLocalContacts(profile.contacts);
-      }, [localContacts]);
-    
-    const onContactsChange = (e) => {
-        profile.contacts( e.currentTarget.value);
+  const [localProfile, setLocalProfile] = useState(profile);
+
+  useEffect(() => {
+    setLocalProfile(profile);
+  }, [profile]);
+
+  const onProfileChange = (e) => {
+    setLocalProfile(prevProfile => ({
+      ...prevProfile,
+      contacts: {
+        ...prevProfile.contacts,
+        [e.target.name]: e.target.value
+      }
+    }));
+  }
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      aboutMe: profile.aboutMe,
+      contacts: {
+        facebook: null,
+        website: null,
+        vk: null,
+        twitter: null,
+        instagram: null,
+        youtube: null,
+        github: null,
+        mainLink: null
+      },
+      lookingForAJob: false,
+      lookingForAJobDescription: profile.lookingForAJobDescription,
+      fullName: profile.fullName
     }
+});
 
-    const { register, handleSubmit } = useForm();
-    
-    const handleSave =  (data) => {
-       console.log(data)
-      };
+  const handleSave = async (NewPofile) => {
+     await updateProfileInfo(NewPofile);
+  };
 
-    return (
-        <form onSubmit={handleSubmit(handleSave)}>
-            <div>
-                <div> 
-                    <input 
-                    autoFocus ={true} 
-                    onChange={onContactsChange}  
-                    name="full Name" 
-                    placeholder={"full Name"} 
-                    {...register('fullName', {   
-                required: "Name!"
-            })} />
-                </div>
-                <div> 
-                    <input 
-                    autoFocus ={true} 
-                    onChange={onContactsChange}  
-                    name="Looking for a job" 
-                    placeholder={"Looking for a job"}
-                    {...register('LookingForJob', {   
-                required: "LookingForJob!"
-            })} />
-                </div>
-                <div> 
-                    <input 
-                    autoFocus ={true} 
-                    onChange={onContactsChange}  
-                    name="Skills" 
-                    placeholder={"Skills"} 
-                    {...register('Skills', {   
-                required: "Skills!"
-            })} />
-                </div>
-                <div> 
-                    <input 
-                    autoFocus ={true} 
-                    onChange={onContactsChange}  
-                    name="Contacts" 
-                    placeholder={"Contacts"} 
-                    {...register('Contacts', {   
-                required: "Contacts!"
-            })} />
-                </div>
+  return (
+    <form onSubmit={handleSubmit(handleSave)}>
+      <div>
+      <div>
+          <textarea
+            autoFocus={true}
+            onChange={onProfileChange}
+            name="aboutMe"
+            placeholder={"About me"}
+            {...register('aboutMe')}
+          />
+        </div>
+        <div>
+          <h4>Contacts:</h4>
+          {Object.keys(localProfile.contacts).map(key => (
+            <div key={key}>
+              <b>{key}:</b>
+              <input
+                autoFocus={true}
+                onChange={onProfileChange}
+                name={`contacts.${key}`}
+                placeholder={key}
+                {...register(`contacts.${key}`)}
+              />
             </div>
+          ))}
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            autoFocus={true}
+            onChange={onProfileChange}
+            name="lookingForAJob"
+            {...register('lookingForAJob')}
+          />
+        </div>
+        <div>
+          <input
+            autoFocus={true}
+            onChange={onProfileChange}
+            name="lookingForAJobDescription"
+            placeholder={"Description"}
+            {...register('lookingForAJobDescription')}
+          />
+        </div>
+        <div>
+          <input
+            onChange={onProfileChange}
+            name="fullName"
+            type="string"
+            placeholder={"fullName"}
+            {...register("fullName", {
+              required: "Full Name is required!"
+            })}
+          />
+        </div>
+      </div>
 
-        <button>Submit</button>
-        </form>
-    )
+      <button type="submit">Submit</button>
+    </form>
+  )
 }
 
 export default ProfileDataForm;

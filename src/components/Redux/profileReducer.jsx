@@ -5,6 +5,7 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const ADD_PROFILE_PHOTO = 'ADD_PROFILE_PHOTO';
+const SET_PROFILE_INFO = 'SET_PROFILE_INFO';
 
 let initialState = {
   postsData: [
@@ -43,6 +44,9 @@ const profileReducer = (state = initialState, action) => {
     case DELETE_POST:{
       return { ...state, postsData: state.postsData.filter(p => p.id !== action.postId)}
     }
+    case SET_PROFILE_INFO: {
+      return { ...state, profile: action.profile }
+    }
     default:
       return state;
   }
@@ -52,7 +56,9 @@ export const addPost = (newPostData) => ({ type: ADD_POST, newPostData });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId });
-export const addProfilePhoto =  (photos) => ({type: ADD_PROFILE_PHOTO, photos}) ;
+export const addProfilePhoto =  (photos) => ({type: ADD_PROFILE_PHOTO, photos});
+export const setProfileInfo = (profile) => ({ type: SET_PROFILE_INFO, profile });
+
 
 
 export const getUserProfile = (userId) => async (dispatch) => {
@@ -76,6 +82,12 @@ export const addPhoto = (file) => async (dispatch) => {
   let response = await samuraiAPI.updatePhoto(file);
   if (response.data.resultCode === 0) {
     dispatch(addProfilePhoto(response.data.data.photos));
+  }
+};
+export const updateProfileInfo = (profile) => async (dispatch) => {
+  let response = await samuraiAPI.updateProfile(profile);
+  if (response.data.resultCode === 0) {
+    dispatch(setProfileInfo(response.data.data.profile));
   }
 };
 

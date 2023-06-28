@@ -7,10 +7,10 @@ import ProfileStatus from './ProfileStatus';
 import AddPhotoInput from './addPhotoInput'
 import ProfileDataForm from "./ProfileDataForm/ProfileDataForm"
 
-const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus }) => {
+const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus , updateProfileInfo}) => {
 
     const [editer,setEditer] = useState(false);
-    console.log(editer)
+
     const activateEditor = () =>{
         setEditer(true);
     }
@@ -31,7 +31,7 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus }) => {
             </div>
             {isOwner ? <button onClick={activateEditor}>Edit</button> : null }
             <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
-            {editer ? <ProfileDataForm profile = {profile}/>
+            {editer ? <ProfileDataForm profile = {profile} updateProfileInfo={updateProfileInfo}/>
              :  <ProfileData 
              profile = {profile} 
              isOwner={isOwner}
@@ -42,20 +42,17 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus }) => {
 }
 
 const ProfileData = ({profile, isOwner, activateEditor}) => { 
-    return <div> 
+    return( <div> 
         <div>
         </div>
         <div> 
             <b>Full name</b>: {profile.fullName} 
         </div> 
-        <div> 
-            <b>Looking for a job</b>: {profile.lookingForAJob ? "yes" : "no"} 
-        </div> 
-        {profile.lookingForAJob && 
-        <div> 
-            <b>My professional skills</b>: {profile.lookingForAJobDescription} 
-        </div> 
-        } 
+        {!profile.lookingForAJob ? (        <div> 
+            <b>Looking for a job</b>: {profile.lookingForAJob} 
+        </div> ) : ( <div> 
+            <b>lookingForAJobDescription</b>: {profile.lookingForAJobDescription} 
+        </div> )}
         <div> 
             <b>About me</b>: {profile.aboutMe} 
         </div> 
@@ -64,7 +61,7 @@ const ProfileData = ({profile, isOwner, activateEditor}) => {
             return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/> 
         })} 
         </div> 
-    </div> 
+    </div> )
 } 
 
 const Contact = ({contactTitle, contactVolue}) => {
