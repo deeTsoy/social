@@ -6,12 +6,15 @@ import { logIn } from "../Redux/authReducer";
 import { useNavigate } from "react-router-dom";
 
 
-const Login = ({logIn,isAuth}) => {
+const Login = ({logIn,isAuth, captchaUrl}) => {
+
 
     const { register, handleSubmit , setError, formState: { errors }} = useForm();
+
     const handleRegistration = async (data) => {
+        console.log(data)
         try {
-          await logIn(data.email, data.password, data.RememberMe);
+          await logIn(data.email, data.password, data.RememberMe, data.captcha);
         } catch (error) {
             setError("common", {
                 type: "manual",
@@ -19,11 +22,14 @@ const Login = ({logIn,isAuth}) => {
               })
         }
       };
+
     
     let navigate = useNavigate();
     if(isAuth) {
         return navigate("/profile");
     }
+
+
 
 
     return (
@@ -45,10 +51,17 @@ const Login = ({logIn,isAuth}) => {
             <label>Remember Me!</label>
         </div>
         <button>Submit</button>
+        { captchaUrl &&  <div className={styles.formControl + " " + (errors.name ? styles.error : "")}>
+            <input name="captcha" placeholder={"captcha"} {...register('captcha', {   
+                required: "Name are captcha!"
+            })} />
+        </div> }
+        {captchaUrl && <img src={captchaUrl}></img>}
         </form>
     )
 }
 const mapStateToProps =(state) => ({
+    captchaUrl:state.auth.captchaUrl,
     isAuth: state.auth.isAuth
 }) 
 

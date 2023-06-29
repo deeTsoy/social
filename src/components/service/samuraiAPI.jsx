@@ -52,8 +52,8 @@ const samuraiAPI = {
     return await this.request(`profile/status`, "put", { status });
   },
 
-  async logIn(email, password, rememberMe = false) {
-    return await this.request("/auth/login", "post", { email, password, rememberMe });
+  async logIn(email, password, rememberMe = false, captcha= null) {
+    return await this.request("/auth/login", "post", { email, password, rememberMe, captcha });
   },
 
   async logOut() {
@@ -73,6 +73,9 @@ const samuraiAPI = {
 async updateProfile(profile) {
   return await this.request(`profile`, "put", profile);
 },
+async getCaptchaUrl() {
+  return await this.request(`security/get-captcha-url`);
+}
 };
 
 export default samuraiAPI;
