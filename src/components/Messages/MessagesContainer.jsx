@@ -3,6 +3,8 @@ import Messages from './Messages';
 import { sendMessageActionCreator } from '../Redux/messageReducer';
 import withAuthRedirect from '../HOC/withAuthRedirect';
 import { useDispatch, useSelector } from 'react-redux';
+import { compose } from 'redux';
+
 
 const MessagesContainer = () => {
   const dispatch = useDispatch();
@@ -18,4 +20,4 @@ const MessagesContainer = () => {
   return <Messages state={messagesPage} isAuth={isAuth} addMessage={addMessage} />;
 };
 
-export default withAuthRedirect(MessagesContainer);
+export default compose(withAuthRedirect)(MessagesContainer);

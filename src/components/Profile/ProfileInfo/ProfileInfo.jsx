@@ -46,7 +46,7 @@ const ProfileInfo = ({profile,isOwner,addPhoto, status, updateUserStatus , updat
       ) 
 }
 
-const ProfileData = ({profile, isOwner, activateEditor}) => { 
+const ProfileData = ({profile}) => { 
     return( <div> 
         <div>
         </div>

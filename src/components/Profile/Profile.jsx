@@ -2,7 +2,7 @@ import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
-const Profile = ({isOwner, profile,status,updateUserStatus,addPhoto,updateProfileInfo,store}) => {
+const Profile = ({isOwner, profile,status,updateUserStatus,addPhoto,updateProfileInfo,follow, unfollow,followingInProgress, store, users}) => {
     return (
     <div> 
       <ProfileInfo 
