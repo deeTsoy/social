@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL = "https://social-network.samuraijs.com/api/1.0/";
-const API_KEY = "f1dada02-45ac-4ca3-ab44-96176a536365";
+const API_KEY = "API_KEY";
 
 const instance = axios.create({
   withCredentials: true,

@@ -34,7 +34,7 @@ const App = () => {
         <NavBar />
         <div className="app-wrapper-content">
           <Suspense fallback={<Loader />}>
-            <Routes>
+             <Routes>
               <Route
                 path="/profile/:userId?"
                 element={<ProfileContainer />}
